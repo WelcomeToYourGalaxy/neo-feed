@@ -1,0 +1,652 @@
+<!-- ============================================================
+     Impact Watch — near-Earth objects worldwide · Weebly embed
+     Paste this whole block into a Weebly "Embed Code" element.
+     Nothing is hosted: the feed travels inside this snippet and runs
+     in its own frame. The only runtime fetch is the wire.
+     ============================================================ -->
+<div id="galaxy-neofeed-embed" style="width:100%;margin:0;padding:0;">
+  <iframe id="galaxy-neofeed-frame"
+          title="Impact Watch — near-Earth objects worldwide"
+          style="width:100%;border:0;display:block;background:#05070e;border-radius:14px;overflow:hidden;"
+          scrolling="no"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+<script type="text/plain" id="galaxy-neofeed-doc">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impact Watch — near-Earth objects, worldwide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   The Space Front — a monitoring feed.
+   Everything scoped to .neo so it can be embedded anywhere.
+   ============================================================ */
+.neo {
+    --ink: #eef2f8;
+    --ink-dim: #9aa8bd;
+    --ink-faint: #67748a;
+    --line: rgba(255,255,255,0.10);
+    --line-soft: rgba(255,255,255,0.06);
+    --accent: #7fe0d8;     /* aqua — live dot, title, progress */
+    --flag: #e0607f;       /* rose — notable marker */
+    --cool: #8fb4ff;
+
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(1100px 520px at 88% -10%, rgba(40,90,130,0.28), transparent 60%),
+        radial-gradient(760px 420px at 4% 4%, rgba(90,50,110,0.18), transparent 58%),
+        linear-gradient(180deg, #05070e 0%, #0a0f1c 60%, #070b14 100%);
+    line-height: 1.45;
+    width: 100%;
+    height: 100svh;
+    min-height: 540px;
+    margin: 0 auto;
+    padding: clamp(0.7rem, 1.6vw, 1.1rem) clamp(0.7rem, 2vw, 1.4rem) 0.6rem;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.45rem, 1vh, 0.75rem);
+    contain: layout style;
+}
+.neo * { box-sizing: border-box; }
+.neo a { color: inherit; }
+
+/* ---------- Header ---------- */
+.neo-head { flex: 0 0 auto; display: flex; align-items: baseline; justify-content: space-between; gap: clamp(0.8rem, 3vw, 2.2rem); flex-wrap: wrap; max-width: 1320px; width: 100%; margin: 0 auto; }
+.neo-title { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(1.35rem, 2.9vw, 2.25rem); line-height: 1.05; letter-spacing: -0.015em; margin: 0; color: #fbfcfe; display: flex; align-items: center; gap: 0.55rem; }
+.neo-title em { font-style: italic; color: var(--accent); }
+.neo-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,0.14); animation: neo-pulse 2.6s ease-in-out infinite; flex: 0 0 auto; }
+.neo-dot.idle { background: #94a3b8; box-shadow: 0 0 0 4px rgba(148,163,184,0.12); animation: none; }
+.neo-dot.error { background: #f87171; box-shadow: 0 0 0 4px rgba(248,113,113,0.14); animation: none; }
+@keyframes neo-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.neo-lede { font-size: clamp(0.63rem, 0.85vw, 0.72rem); color: var(--ink-dim); max-width: 62ch; margin: 0; line-height: 1.45; }
+.neo-lede strong { color: var(--ink); font-weight: 500; }
+
+/* ---------- Panel ---------- */
+.neo-panel { flex: 1 1 auto; min-height: 0; max-width: 1320px; width: 100%; margin: 0 auto; border: 1px solid var(--line-soft); border-radius: 16px; background: rgba(255,255,255,0.022); overflow: hidden; display: flex; flex-direction: column; }
+.neo-bar { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; flex-wrap: wrap; padding: 0.45rem 0.9rem; border-bottom: 1px solid var(--line-soft); }
+.neo-status { font-size: 0.63rem; color: var(--ink-dim); margin: 0; }
+.neo-tools { display: flex; align-items: center; gap: 0.4rem; flex: 1 1 260px; justify-content: flex-end; max-width: 520px; }
+.neo-search { flex: 1 1 auto; min-width: 120px; font-family: inherit; font-size: 0.7rem; color: var(--ink); background: rgba(255,255,255,0.04); border: 1px solid var(--line-soft); border-radius: 8px; padding: 0.3rem 0.6rem; }
+.neo-search::placeholder { color: var(--ink-faint); }
+.neo-search:focus { outline: none; border-color: rgba(255,255,255,0.24); }
+.neo-btn { font-family: inherit; font-size: 0.62rem; letter-spacing: 0.06em; color: var(--ink); background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 999px; padding: 0.28rem 0.7rem; cursor: pointer; flex: 0 0 auto; }
+.neo-btn:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.24); }
+.neo-btn:disabled { opacity: 0.5; cursor: default; }
+.neo-progress { height: 2px; background: rgba(255,255,255,0.06); }
+.neo-progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.35s ease; }
+
+.neo-filters { flex: 0 0 auto; display: flex; flex-direction: column; gap: 0.2rem; padding: 0.35rem 0.9rem; border-bottom: 1px solid var(--line-soft); }
+.neo-row { display: flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; padding-bottom: 1px; }
+.neo-row::-webkit-scrollbar { height: 0; }
+.neo-key { position: sticky; left: 0; z-index: 1; flex: 0 0 auto; font-size: 0.53rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); background: linear-gradient(90deg, #0a0f1c 72%, transparent); padding-right: 0.4rem; min-width: 62px; }
+.neo-chip { flex: 0 0 auto; font-family: inherit; font-size: 0.62rem; color: var(--ink-dim); background: rgba(255,255,255,0.03); border: 1px solid var(--line-soft); border-radius: 999px; padding: 0.15rem 0.55rem; cursor: pointer; white-space: nowrap; }
+.neo-chip:hover { color: var(--ink); border-color: rgba(255,255,255,0.22); }
+.neo-chip.on { color: #08111f; background: var(--chipcolor, #e8eef7); border-color: transparent; font-weight: 500; }
+.neo-chip .neo-n { opacity: 0.6; margin-left: 0.3rem; font-variant-numeric: tabular-nums; }
+.neo-chip.empty { opacity: 0.4; }
+
+.neo-list { flex: 1 1 auto; min-height: 130px; overflow-y: auto; scrollbar-width: thin; overscroll-behavior: contain; }
+.neo-item { display: block; padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--line-soft); text-decoration: none; color: inherit; }
+.neo-item:last-child { border-bottom: 0; }
+.neo-item:hover { background: rgba(255,255,255,0.035); }
+.neo-item.watch { border-left: 2px solid var(--flag); }
+.neo-meta { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; font-size: 0.57rem; color: var(--ink-faint); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.2rem; }
+.neo-lang { color: #cbd6e6; background: rgba(255,255,255,0.07); border-radius: 4px; padding: 0.06rem 0.32rem; letter-spacing: 0.08em; }
+.neo-flag { color: var(--flag); border: 1px solid rgba(255,107,157,0.5); border-radius: 4px; padding: 0.04rem 0.3rem; }
+.neo-scale { display: inline-flex; gap: 2px; align-items: center; }
+.neo-pip { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+.neo-pip.on { background: var(--accent); }
+.neo-why { color: var(--ink-faint); letter-spacing: 0.08em; }
+.neo-standing { border: 1px solid; border-radius: 999px; padding: 0.02rem 0.4rem; letter-spacing: 0.12em; }
+.neo-item-title { font-size: 0.79rem; font-weight: 500; line-height: 1.35; color: #f0f4fa; }
+.neo-item:hover .neo-item-title { color: var(--cool); }
+.neo-snip { font-size: 0.66rem; line-height: 1.45; color: var(--ink-dim); margin-top: 0.15rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.neo-tags { display: flex; gap: 0.28rem; flex-wrap: wrap; margin-top: 0.3rem; }
+.neo-t { font-size: 0.53rem; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid; border-radius: 999px; padding: 0.08rem 0.42rem; }
+.neo-state { padding: 1.6rem 1rem; text-align: center; font-size: 0.74rem; color: var(--ink-dim); line-height: 1.6; }
+.neo-state strong { color: var(--ink); font-weight: 500; }
+.neo-more { display: block; width: 100%; border: 0; border-top: 1px solid var(--line-soft); background: rgba(255,255,255,0.02); font-family: inherit; font-size: 0.64rem; color: var(--ink-dim); padding: 0.45rem; cursor: pointer; letter-spacing: 0.06em; }
+.neo-more:hover { color: var(--ink); }
+
+/* ---------- Sheets ---------- */
+.neo-sheet { position: absolute; left: clamp(0.7rem, 2vw, 1.4rem); right: clamp(0.7rem, 2vw, 1.4rem); bottom: 2.6rem; z-index: 30; max-height: 66%; overflow-y: auto; display: none; border: 1px solid var(--line); border-radius: 14px; padding: 0.9rem 1rem; background: rgba(10,15,28,0.96); backdrop-filter: blur(10px); box-shadow: 0 24px 60px rgba(0,0,0,0.55); }
+.neo-sheet.open { display: block; }
+.neo-sheet-close { position: absolute; top: 0.5rem; right: 0.7rem; background: none; border: 0; color: var(--ink-faint); font-size: 1rem; cursor: pointer; font-family: inherit; line-height: 1; }
+.neo-sheet-close:hover { color: var(--ink); }
+.neo-note { font-size: 0.68rem; line-height: 1.6; color: var(--ink-dim); margin: 0 0 0.6rem; max-width: 96ch; }
+.neo-note strong { color: var(--ink); font-weight: 500; }
+.neo-src-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.1rem 0.9rem; }
+.neo-src { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.62rem; color: var(--ink-dim); padding: 0.14rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.neo-src span:last-child { font-variant-numeric: tabular-nums; color: var(--ink-faint); }
+.neo-src.fail span:last-child { color: #d98a8a; }
+
+.neo-foot { flex: 0 0 auto; max-width: 1320px; width: 100%; margin: 0 auto; padding-top: 0.4rem; border-top: 1px solid var(--line-soft); font-size: 0.57rem; color: var(--ink-faint); line-height: 1.4; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.neo-foot-tools { display: flex; gap: 0.35rem; flex: 0 0 auto; }
+.neo-tab { font-family: inherit; font-size: 0.58rem; letter-spacing: 0.08em; color: var(--ink-dim); background: rgba(255,255,255,0.04); border: 1px solid var(--line-soft); border-radius: 999px; padding: 0.2rem 0.6rem; cursor: pointer; }
+.neo-tab:hover, .neo-tab.on { color: var(--ink); border-color: rgba(255,255,255,0.24); }
+
+@media (max-width: 900px) {
+    .neo { height: auto; min-height: 0; overflow: visible; }
+    .neo-panel { flex: 0 0 auto; }
+    .neo-list { max-height: 70vh; }
+    .neo-sheet { position: fixed; left: 0.6rem; right: 0.6rem; bottom: 0.6rem; max-height: 72vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .neo *, .neo *::before, .neo *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body style="margin:0; background:#05070e;">
+<div class="neo">
+
+    <header class="neo-head">
+        <h1 class="neo-title"><span class="neo-dot idle" id="neoDot"></span> Impact <em>watch</em></h1>
+        <p class="neo-lede">
+            <strong>Near-Earth objects worldwide, in 25 languages: what is coming close, what has come down,
+            what the projections say, and who is building the means to deflect it.</strong>
+            Every row shows the source's standing and what the story carries — a confirmed event, a risk listing,
+            a measurement, a projection.
+        </p>
+    </header>
+
+    <section class="neo-panel">
+        <div class="neo-bar">
+            <p class="neo-status" id="neoStatus">Loading the wire…</p>
+            <div class="neo-tools">
+                <input class="neo-search" id="neoSearch" type="search" placeholder="Apophis, fireball, close approach, Bennu…" aria-label="Filter headlines">
+                <button class="neo-btn" id="neoClear">Clear</button>
+                <button class="neo-btn" id="neoRefresh">Refresh</button>
+            </div>
+        </div>
+        <div class="neo-progress"><div class="neo-progress-fill" id="neoProgress"></div></div>
+
+        <div class="neo-filters">
+            <div class="neo-row" id="neoTopicRow"><span class="neo-key">Subject</span></div>
+            <div class="neo-row" id="neoGeoRow"><span class="neo-key">Region</span></div>
+            <div class="neo-row" id="neoRegionRow"><span class="neo-key">Standing</span></div>
+            <div class="neo-row" id="neoEvidenceRow"><span class="neo-key">Weight</span></div>
+            <div class="neo-row" id="neoLangRow"><span class="neo-key">Language</span></div>
+            <div class="neo-row" id="neoWhenRow"><span class="neo-key">Window</span></div>
+        </div>
+
+        <div class="neo-list" id="neoList"><div class="neo-state">Loading the wire…</div></div>
+    </section>
+
+    <div class="neo-sheet" id="neoSheetAbout" role="dialog" aria-label="How this feed works">
+        <button class="neo-sheet-close" data-close aria-label="Close">×</button>
+        <p class="neo-note">
+            <strong>What this is.</strong> A feed on near-Earth objects: asteroids, comets and meteoroids on
+            Earth-crossing paths, the events they produce, the projections made about them, and the surveys,
+            missions and companies whose work is finding and deflecting them. Nothing here is written or
+            summarised: headlines and snippets are the publishers' own, every row links to the original, and no
+            model touches the text.
+        </p>
+        <p class="neo-note">
+            <strong>What it is not.</strong> This is not a space-industry feed. Launches, constellations, crewed
+            flight and orbital politics are covered elsewhere; they appear here only when an asteroid or comet is
+            the subject. A NEO Surveyor contract belongs here, a Starlink launch does not.
+        </p>
+        <p class="neo-note">
+            <strong>Standing.</strong> Every wire is labelled by what kind of source it is, and every row carries
+            the label. <em>Official</em> is the agencies and reporting networks: NASA, JPL, ESA Space Safety, the
+            meteor observation organisations. <em>Science</em> is journals and preprints. <em>Specialist</em> is
+            the observing and planetary press. <em>Press</em> is general news across 25 languages. Standing is
+            provenance, not a claim that a story is important.
+        </p>
+        <p class="neo-note">
+            <strong>Significance.</strong> Separately, each story is scored on what it carries: a confirmed
+            event — an airburst, a recovered meteorite, an atmospheric entry (2); an official risk listing —
+            Sentry, the ESA risk list, a Torino or Palermo rating, a Minor Planet Center designation (2); a
+            measurement such as a size, a distance in lunar distances, or a velocity (1); a forward projection
+            (1); a named object designation (1); and a primary source (1). At three or more the row is marked
+            notable, and the <em>Weight</em> filter narrows to those. The pips show the score; the words beside
+            them say what earned it.
+        </p>
+        <p class="neo-note">
+            <strong>What is refused.</strong> The figurative meteor and the fictional asteroid: meteoric rises,
+            <em>Asteroid City</em>, <em>Armageddon</em>, box-office returns. Astrology, which uses this
+            vocabulary constantly — Chiron, retrogrades, birth charts. And doom-mongering with no object behind
+            it: Planet X, Nibiru, end-of-the-world prophecy. The status line reports how many stories each
+            harvest refused.
+        </p>
+        <p class="neo-note">
+            <strong>Limits worth knowing.</strong> The gate is mechanical: it reads words, not meaning. Standing
+            is assigned per wire rather than per article. Google News caps a query at roughly 100 results over
+            about 30 days. Coverage is uneven by language and the counts show it rather than hiding it.
+        </p>
+    </div>
+
+    <div class="neo-sheet" id="neoSheetSources" role="dialog" aria-label="Sources and coverage">
+        <button class="neo-sheet-close" data-close aria-label="Close">×</button>
+        <p class="neo-note">
+            Every wire read on the last harvest, with its standing: what it returned, and how many of its
+            stories were refused. A wire that could not be reached says so rather than disappearing.
+        </p>
+        <div class="neo-src-grid" id="neoSrcGrid"></div>
+    </div>
+
+    <footer class="neo-foot">
+        <span>Harvested every two hours from space agencies, meteor observation networks, journals, the observing press, regional editions in 25 languages, and dedicated event searches. Headlines belong to their publishers.</span>
+        <span class="neo-foot-tools">
+            <button class="neo-tab" data-sheet="neoSheetAbout">How this works</button>
+            <button class="neo-tab" data-sheet="neoSheetSources">Sources &amp; coverage</button>
+        </span>
+    </footer>
+</div>
+
+<script>
+(function () {
+'use strict';
+
+const REPO = 'WelcomeToYourGalaxy/neo-feed';
+const BRANCH = 'main';
+const ENDPOINTS = [
+    () => 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/wire_neo.json?t=' + Date.now(),
+    () => 'https://cdn.jsdelivr.net/gh/' + REPO + '@' + BRANCH + '/wire_neo.json'
+];
+
+const TOPIC_COLOR = {
+    discovery: '#7fe0d8',    // aqua
+    approach: '#6fd3ff',     // cyan
+    impact: '#e0607f',       // rose
+    risk: '#cf6fd8',         // magenta
+    defence: '#9fb8ff',      // indigo
+    missions: '#6f9bff',     // azure
+    science: '#8de6c8',      // mint
+    industry: '#4fc4a0',     // teal
+    policy: '#e29ad8',       // pink
+    interstellar: '#a98cf0'  // violet
+};
+const STANDING_COLOR = {
+    official: '#9fb8ff', science: '#8de6c8', specialist: '#a98cf0', press: '#9fb0c8'
+};
+const WINDOWS = [
+    { id: 'd1', label: '24 hours', ms: 864e5 },
+    { id: 'd7', label: '7 days', ms: 7 * 864e5 },
+    { id: 'd30', label: '30 days', ms: 30 * 864e5 },
+    // the wire keeps 45 days, so anything past a month is reachable on its own
+    { id: 'older', label: 'Older than 30 days', ms: 30 * 864e5, older: true },
+    { id: 'all', label: 'Everything', ms: null }
+];
+
+const EVIDENCE = [
+    { id: 'all', label: 'Any' },
+    { id: 'doc', label: 'Notable only' }
+];
+
+const state = { items: [], topics: [], languages: {}, sources: [], generated: null,
+                geo: [], standings: [], docScore: 3, topic: 'all', standing: 'all', place: 'all',
+                langs: new Set(), when: 'all', evidence: 'all', query: '', shown: 50, loading: false };
+
+const $list = document.getElementById('neoList');
+const $status = document.getElementById('neoStatus');
+const $dot = document.getElementById('neoDot');
+const $prog = document.getElementById('neoProgress');
+const $topicRow = document.getElementById('neoTopicRow');
+const $standingRow = document.getElementById('neoRegionRow');
+const $evidenceRow = document.getElementById('neoEvidenceRow');
+const $geoRow = document.getElementById('neoGeoRow');
+const $langRow = document.getElementById('neoLangRow');
+const $whenRow = document.getElementById('neoWhenRow');
+const $search = document.getElementById('neoSearch');
+const $srcGrid = document.getElementById('neoSrcGrid');
+const $refresh = document.getElementById('neoRefresh');
+const $more = document.createElement('button');
+$more.className = 'neo-more';
+$more.addEventListener('click', () => { state.shown += 50; render(); });
+
+function esc(s) { return (s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+function timeAgo(ts) {
+    if (!ts) return 'undated';
+    const m = Math.round((Date.now() - ts) / 60000);
+    if (m < 1) return 'just now';
+    if (m < 60) return m + 'm ago';
+    const h = Math.round(m / 60);
+    if (h < 24) return h + 'h ago';
+    const d = Math.round(h / 24);
+    return d < 30 ? d + 'd ago' : new Date(ts).toISOString().slice(0, 10);
+}
+function langName(c) { return state.languages[c] || c; }
+function placeLabel(places) {
+    const named = places.filter(p => p !== 'unlocated');
+    if (!named.length) return 'unplaced';
+    return named.map(p => {
+        const g = state.geo.find(g => g.id === p);
+        return g ? g.label : p;
+    }).slice(0, 3).join(' · ');
+}
+function topicLabel(id) { const t = state.topics.find(t => t.id === id); return t ? t.label : id; }
+function setStatus(text, cls) { $status.textContent = text; $dot.className = 'neo-dot' + (cls ? ' ' + cls : ''); }
+
+async function load() {
+    if (state.loading) return;
+    state.loading = true; $refresh.disabled = true; $prog.style.width = '40%';
+    setStatus('Loading the wire…', '');
+
+    let data = null, err = null;
+    for (const ep of ENDPOINTS) {
+        try {
+            const res = await fetch(ep(), { cache: 'no-store' });
+            if (!res.ok) { err = 'HTTP ' + res.status; continue; }
+            data = await res.json(); break;
+        } catch (e) { err = e.message; }
+    }
+    $prog.style.width = '100%';
+
+    if (!data || !Array.isArray(data.items)) {
+        state.loading = false; $refresh.disabled = false; $prog.style.width = '0';
+        setStatus('The wire could not be read' + (err ? ' (' + err + ')' : '') + '. Press Refresh.', 'error');
+        render(); return;
+    }
+
+    state.items = data.items.map(i => ({
+        title: i.t, link: i.u, outlet: i.o, lang: i.g, region: i.r,
+        kind: i.k, ts: i.d, snippet: i.s, topics: i.x || ['climate'],
+        score: i.p || 0, why: i.y || [], places: i.w || ['unlocated'],
+        standing: i.st || 'press'
+    }));
+    state.docScore = data.notable_score || 3;
+    state.standings = data.standings || [];
+    state.topics = data.topics || [];
+    state.languages = data.languages || {};
+    state.geo = data.geo || [];
+    state.sources = data.sources || [];
+    state.generated = data.generated ? Date.parse(data.generated) : null;
+
+    buildChips(); renderSources();
+
+    const c = data.counts || {};
+    const ageH = state.generated ? (Date.now() - state.generated) / 3600000 : null;
+    const docd = state.items.filter(i => i.score >= state.docScore).length;
+    setStatus(
+        (c.stories || state.items.length) + ' stories · ' + docd + ' notable · ' +
+        (c.refused ? c.refused + ' refused · ' : '') +
+        (c.languages || new Set(state.items.map(i => i.lang)).size) + ' languages · ' +
+        (c.wires_ok || '?') + '/' + (c.wires_total || '?') + ' wires answered · harvested ' +
+        (state.generated ? timeAgo(state.generated) : 'unknown'),
+        ageH !== null && ageH > 6 ? 'idle' : ''
+    );
+
+    state.loading = false; $refresh.disabled = false;
+    setTimeout(() => { $prog.style.width = '0'; }, 400);
+    render();
+}
+
+function withinWindow(i, win) {
+    const w = WINDOWS.find(w => w.id === (win || state.when));
+    if (!w || !w.ms) return true;
+    if (!i.ts) return false;
+    const age = Date.now() - i.ts;
+    return w.older ? age > w.ms : age <= w.ms;
+}
+
+function visible() {
+    const q = state.query.toLowerCase();
+    return state.items.filter(i => {
+        if (state.topic !== 'all' && i.topics.indexOf(state.topic) === -1) return false;
+        if (state.standing !== 'all' && i.standing !== state.standing) return false;
+        if (state.evidence === 'doc' && i.score < state.docScore) return false;
+        if (state.place !== 'all' && i.places.indexOf(state.place) === -1) return false;
+        if (state.langs.size && !state.langs.has(i.lang)) return false;
+        if (!withinWindow(i)) return false;
+        if (q && (i.title + ' ' + i.snippet + ' ' + i.outlet).toLowerCase().indexOf(q) === -1) return false;
+        return true;
+    }).sort((a, b) => (b.ts || 0) - (a.ts || 0));
+}
+
+function render() {
+    const items = visible(), slice = items.slice(0, state.shown);
+    if (!slice.length) {
+        $list.innerHTML = '<div class="neo-state">' + (
+            state.loading ? 'Loading the wire…'
+            : state.items.length ? '<strong>Nothing matches these filters.</strong><br>Widen the window, the subject or the language.'
+            : '<strong>No stories loaded.</strong><br>Press Refresh, or check that the harvester has run.'
+        ) + '</div>';
+    } else {
+        $list.innerHTML = slice.map(i => {
+            const tags = i.topics.map(id => {
+                const c = TOPIC_COLOR[id] || '#9fb0c8';
+                return '<span class="neo-t" style="color:' + c + ';border-color:' + c + '55">' + esc(topicLabel(id)) + '</span>';
+            }).join('');
+            const documented = i.score >= state.docScore;
+            const sc = STANDING_COLOR[i.standing] || '#9fb0c8';
+            const stLabel = (state.standings.find(s => s.id === i.standing) || {}).label || i.standing;
+            const pips = '<span class="neo-scale" title="significance score ' + i.score + '">' +
+                [1,2,3,4,5].map(n => '<span class="neo-pip' + (n <= Math.min(i.score,5) ? ' on' : '') + '"></span>').join('') +
+                '</span>';
+            return '<a class="neo-item' + (documented ? ' watch' : '') + '" href="' + esc(i.link) + '" target="_blank" rel="noopener noreferrer">' +
+                '<div class="neo-meta"><span class="neo-lang">' + esc(langName(i.lang)) + '</span>' +
+                '<span class="neo-standing" style="color:' + sc + ';border-color:' + sc + '55">' + esc(stLabel) + '</span>' +
+                '<span>' + esc(i.outlet) + '</span>' +
+                '<span>' + esc(placeLabel(i.places)) + '</span>' +
+                pips + (i.why.length ? '<span class="neo-why">' + esc(i.why.join(' · ')) + '</span>' : '') +
+                '<span>' + timeAgo(i.ts) + '</span></div>' +
+                '<div class="neo-item-title">' + esc(i.title) + '</div>' +
+                (i.snippet ? '<div class="neo-snip">' + esc(i.snippet) + '</div>' : '') +
+                '<div class="neo-tags">' + tags + '</div></a>';
+        }).join('');
+        if (items.length > state.shown) {
+            $more.textContent = 'Show more (' + (items.length - state.shown) + ' remaining)';
+            $list.appendChild($more);
+        }
+    }
+    chipCounts();
+}
+
+function chip(row, key, value, label, color) {
+    const c = document.createElement('button');
+    c.className = 'neo-chip';
+    c.dataset[key] = value;
+    if (color) c.style.setProperty('--chipcolor', color);
+    c.innerHTML = esc(label) + ' <span class="neo-n"></span>';
+    row.appendChild(c);
+    return c;
+}
+
+function buildChips() {
+    [$topicRow, $geoRow, $standingRow, $evidenceRow, $langRow, $whenRow].forEach(r => r.querySelectorAll('.neo-chip').forEach(c => c.remove()));
+
+    chip($topicRow, 'topic', 'all', 'All').classList.add('on');
+    state.topics.forEach(t => chip($topicRow, 'topic', t.id, t.label, TOPIC_COLOR[t.id]));
+
+    chip($geoRow, 'place', 'all', 'Everywhere').classList.add('on');
+    state.geo.forEach(g => {
+        const c = chip($geoRow, 'place', g.id, g.label);
+        if (g.id === state.place) c.classList.add('on');
+    });
+
+    chip($standingRow, 'standing', 'all', 'All').classList.add('on');
+    state.standings.forEach(st => {
+        const c = chip($standingRow, 'standing', st.id, st.label);
+        c.style.setProperty('--chipcolor', STANDING_COLOR[st.id] || '#e8eef7');
+        if (st.id === state.standing) c.classList.add('on');
+    });
+
+    EVIDENCE.forEach(e => {
+        const c = chip($evidenceRow, 'evidence', e.id, e.label);
+        if (e.id === state.evidence) c.classList.add('on');
+    });
+
+    Object.keys(state.languages).sort((a, b) => langName(a).localeCompare(langName(b)))
+        .forEach(code => chip($langRow, 'lang', code, langName(code)));
+
+    WINDOWS.forEach(w => {
+        const c = chip($whenRow, 'when', w.id, w.label);
+        if (w.id === state.when) c.classList.add('on');
+    });
+
+}
+
+function chipCounts() {
+    const q = state.query.toLowerCase();
+    const base = state.items.filter(i =>
+        (!q || (i.title + ' ' + i.snippet).toLowerCase().indexOf(q) !== -1) && withinWindow(i));
+    $topicRow.querySelectorAll('.neo-chip').forEach(c => {
+        const id = c.dataset.topic;
+        const n = id === 'all' ? base.length : base.filter(i => i.topics.indexOf(id) !== -1).length;
+        c.querySelector('.neo-n').textContent = n;
+        c.classList.toggle('empty', n === 0 && id !== 'all');
+    });
+    $geoRow.querySelectorAll('.neo-chip').forEach(c => {
+        const g = c.dataset.place;
+        const n = g === 'all' ? base.length : base.filter(i => i.places.indexOf(g) !== -1).length;
+        c.querySelector('.neo-n').textContent = n;
+        c.classList.toggle('empty', n === 0 && g !== 'all');
+    });
+    $standingRow.querySelectorAll('.neo-chip').forEach(c => {
+        const r = c.dataset.standing;
+        const n = r === 'all' ? base.length : base.filter(i => i.standing === r).length;
+        c.querySelector('.neo-n').textContent = n;
+        c.classList.toggle('empty', n === 0 && r !== 'all');
+    });
+    $evidenceRow.querySelectorAll('.neo-chip').forEach(c => {
+        const id = c.dataset.evidence;
+        c.querySelector('.neo-n').textContent =
+            id === 'doc' ? base.filter(i => i.score >= state.docScore).length : base.length;
+    });
+    $langRow.querySelectorAll('.neo-chip').forEach(c => {
+        const n = base.filter(i => i.lang === c.dataset.lang).length;
+        c.querySelector('.neo-n').textContent = n;
+        c.classList.toggle('empty', n === 0);
+    });
+    $whenRow.querySelectorAll('.neo-chip').forEach(c => {
+        const n = state.items.filter(i => withinWindow(i, c.dataset.when)).length;
+        c.querySelector('.neo-n').textContent = n;
+        // the archive chip only appears once there is an archive
+        if (c.dataset.when === 'older') c.style.display = n ? '' : 'none';
+    });
+}
+
+function renderSources() {
+    $srcGrid.innerHTML = state.sources.map(s =>
+        '<div class="neo-src ' + (s.ok ? '' : 'fail') + '"><span>' + esc(s.name) + '</span>' +
+        '<span>' + (s.ok ? s.kept + ' kept' + (s.refused ? ' · ' + s.refused + ' refused' : '') : 'unreachable') +
+        '</span></div>').join('');
+}
+
+/* ---- Wiring ---- */
+function single(row, key) {
+    row.addEventListener('click', e => {
+        const c = e.target.closest('.neo-chip'); if (!c) return;
+        state[key] = c.dataset[key]; state.shown = 50;
+        row.querySelectorAll('.neo-chip').forEach(x => x.classList.toggle('on', x === c));
+        render();
+    });
+}
+single($topicRow, 'topic');
+single($standingRow, 'standing');
+single($evidenceRow, 'evidence');
+single($geoRow, 'place');
+single($whenRow, 'when');
+
+$langRow.addEventListener('click', e => {
+    const c = e.target.closest('.neo-chip'); if (!c) return;
+    const code = c.dataset.lang;
+    if (state.langs.has(code)) state.langs.delete(code); else state.langs.add(code);
+    c.classList.toggle('on', state.langs.has(code));
+    state.shown = 50; render();
+});
+
+$refresh.addEventListener('click', load);
+document.getElementById('neoClear').addEventListener('click', () => {
+    state.topic = 'all'; state.standing = 'all'; state.evidence = 'all'; state.place = 'all';
+    state.langs.clear(); state.when = 'all';
+    state.query = ''; state.shown = 50; $search.value = '';
+    $topicRow.querySelectorAll('.neo-chip').forEach(c => c.classList.toggle('on', c.dataset.topic === 'all'));
+    $standingRow.querySelectorAll('.neo-chip').forEach(c => c.classList.toggle('on', c.dataset.standing === 'all'));
+    $evidenceRow.querySelectorAll('.neo-chip').forEach(c => c.classList.toggle('on', c.dataset.evidence === 'all'));
+    $geoRow.querySelectorAll('.neo-chip').forEach(c => c.classList.toggle('on', c.dataset.place === 'all'));
+    $langRow.querySelectorAll('.neo-chip').forEach(c => c.classList.remove('on'));
+    $whenRow.querySelectorAll('.neo-chip').forEach(c => c.classList.toggle('on', c.dataset.when === 'all'));
+    render();
+});
+let timer;
+$search.addEventListener('input', e => {
+    clearTimeout(timer); const v = e.target.value;
+    timer = setTimeout(() => { state.query = v; state.shown = 50; render(); }, 180);
+});
+
+document.querySelectorAll('.neo-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        const sheet = document.getElementById(tab.dataset.sheet);
+        const opening = !sheet.classList.contains('open');
+        document.querySelectorAll('.neo-sheet').forEach(s => s.classList.remove('open'));
+        document.querySelectorAll('.neo-tab').forEach(t => t.classList.remove('on'));
+        if (opening) { sheet.classList.add('open'); tab.classList.add('on'); }
+    });
+});
+document.querySelectorAll('.neo-sheet [data-close]').forEach(b => {
+    b.addEventListener('click', () => {
+        b.closest('.neo-sheet').classList.remove('open');
+        document.querySelectorAll('.neo-tab').forEach(t => t.classList.remove('on'));
+    });
+});
+document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.neo-sheet').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.neo-tab').forEach(t => t.classList.remove('on'));
+});
+
+load();
+setInterval(() => { if (!document.hidden) load(); }, 15 * 60 * 1000);
+})();
+@@GALAXY_END_SCRIPT@@
+
+<script>
+(function () {
+    function report() {
+        if (window.innerWidth > 900) return;
+        var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        parent.postMessage({ galaxyEmbed: 'height', value: h }, '*');
+    }
+    window.addEventListener('load', report);
+    window.addEventListener('resize', report);
+    setInterval(report, 1500);
+})();
+@@GALAXY_END_SCRIPT@@
+</body>
+</html>
+
+</script>
+
+<script>
+(function () {
+    var frame = document.getElementById('galaxy-neofeed-frame');
+    var store = document.getElementById('galaxy-neofeed-doc');
+    if (!frame || !store) return;
+    var doc = store.textContent.split('@@GALAXY_END_SCRIPT@@').join('<' + '/script>');
+
+    function sizeFrame() {
+        if (window.innerWidth > 900) {
+            var h = Math.max(560, Math.min(window.innerHeight * 0.88, 1000));
+            frame.style.height = Math.round(h) + 'px';
+        } else if (!frame.dataset.selfSized) {
+            frame.style.height = '1400px';
+        }
+    }
+    sizeFrame();
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 900) { frame.dataset.selfSized = ''; }
+        sizeFrame();
+    });
+    window.addEventListener('message', function (e) {
+        if (!e.data || e.data.galaxyEmbed !== 'height') return;
+        if (window.innerWidth > 900) return;
+        frame.dataset.selfSized = '1';
+        frame.style.height = Math.round(Math.max(600, Math.min(e.data.value + 20, 6000))) + 'px';
+    });
+
+    if ('srcdoc' in frame) { frame.srcdoc = doc; }
+    else { var d = frame.contentWindow.document; d.open(); d.write(doc); d.close(); }
+})();
+</script>
