@@ -42,6 +42,20 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 
+# The shared gazetteer. Placement used to be each wire's own short country
+# table, which put most of every wire in a counter marked "unplaced"; this is
+# the fleet's common one, and it is optional at import so a harvest still runs
+# if the data file has not been fetched yet.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    import galaxy_places
+    _GAZETTEER = True
+except Exception as _exc:                       # noqa: BLE001
+    print("  ! gazetteer unavailable (%s); falling back to the local table"
+          % _exc, file=sys.stderr)
+    galaxy_places = None
+    _GAZETTEER = False
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 SOURCES_PATH = os.path.join(HERE, "sources_neo.json")
 OUT_PATH = os.path.join(HERE, "wire_neo.json")
@@ -72,9 +86,24 @@ def build_gnews_url(loc):
     return ("https://news.google.com/rss/search?q=" + urllib.parse.quote(q) +
             "&hl=" + loc["hl"] + "&gl=" + loc["gl"] + "&ceid=" + loc["ceid"])
 
+READ_BUDGET_MIN = 35          # minutes spent reading wires
+
+# The wall-clock budget for reading wires. Past it the remaining sources are
+# recorded unreachable and the harvest finishes on what it has, because the
+# wire is only written at the end of run() and a job killed by the workflow
+# timeout commits nothing at all — which is how a feed gets stuck stale.
+DEADLINE = None
+
+
+def out_of_time():
+    return DEADLINE is not None and time.monotonic() > DEADLINE
+
+
 def fetch(url, tries=3):
     last = None
     for attempt in range(tries):
+        if out_of_time():
+            return None
         try:
             req = urllib.request.Request(url, headers={
                 "User-Agent": USER_AGENT,
@@ -87,6 +116,16 @@ def fetch(url, tries=3):
                 if resp.headers.get("Content-Encoding") == "gzip":
                     raw = gzip.GzipFile(fileobj=io.BytesIO(raw)).read()
                 return raw
+        except urllib.error.HTTPError as exc:
+            last = exc
+            # Being rate-limited or refused is an answer, not a hiccup. Trying
+            # the same query twice more against the same limiter spends eighty
+            # seconds of a worker slot to be told the same thing, and deepens
+            # the throttle for every other query in the run.
+            if exc.code in (403, 429, 451):
+                time.sleep(1.5)
+                break
+            time.sleep(1.5 * (attempt + 1))
         except Exception as exc:                       # noqa: BLE001 — report, don't crash the run
             last = exc
             time.sleep(1.5 * (attempt + 1))
@@ -539,6 +578,110 @@ TOPICS = [
 # BLOCK  — the film titles, the astrology column, and "meteoric" in its
 #          figurative sense, which is what fills a feed like this otherwise.
 # --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# The subjects, in the languages the anchor already reads.
+#
+# The anchor list is multilingual and the subjects were not, so a Spanish,
+# Russian, Turkish or Bengali story about an approach, a detection or a
+# deflection study passed relevance and then matched nothing — and the run
+# loop's silent default filed 388 of 530 under "science" regardless.
+#
+# A story reaching this point already names an asteroid, a comet, a bolide or a
+# geocroiseur, so these can be written broadly: the question is no longer
+# whether it is the subject but which part of it.
+# --------------------------------------------------------------------------
+LOCAL_TERMS = {
+    "approach": [
+        ("se acercará", []), ("se aproxima", []), ("se acerca", []),
+        ("roza*", ["tierra", "planeta"]), ("pasará", ["tierra", "cerca", "distancia"]),
+        ("más cerca de la tierra", []), ("a una distancia", ["récord", "tierra"]),
+        ("pasará cerca", []), ("sobrevuelo", []), ("acercamiento", []),
+        ("frôlé", []), ("passera près", []), ("survol", ["astéroïde", "comète"]),
+        ("passaggio ravvicinato", []), ("ravvicinat*", ["asteroid", "passagg"]),
+        ("sfiorerà", []), ("sfiorato", []), ("verso la terra", []),
+        ("passagem", ["próxima", "rasante"]), ("aproximação", []),
+        ("passar raspando", []), ("raspando", ["terra"]), ("vai passar", ["terra", "perto"]),
+        ("dünya'nın dibinden", []), ("geçecek", ["asteroit", "dünya"]), ("yakın geçiş", []),
+        ("сблизится", []), ("пролетит", []), ("приблизится", []), ("сближение", []),
+        ("наблизиться", []), ("接近", ["小行星", "彗星", "地球"]), ("飛来", []),
+        ("근접", ["소행성", "지구"]), ("掠过", []), ("掠過", []),
+        ("سيمر", ["كويكب"]), ("يقترب", ["كويكب"]), ("bay gần", []), ("tiếp cận", ["tiểu hành tinh"]),
+        ("mendekati bumi", []), ("เฉียดโลก", []),
+    ],
+    "discovery": [
+        ("descubri*", ["asteroide", "cometa", "objeto"]), ("detectado", []), ("hallazgo", ["asteroide", "cometa"]),
+        ("découvert*", ["astéroïde", "comète", "objet"]), ("détecté", []),
+        ("scoperto", ["asteroide", "cometa"]), ("individuato", []),
+        ("descoberto", ["asteroide", "cometa"]), ("keşfedildi", []), ("tespit edildi", []),
+        ("обнаружен*", []), ("открыт*", ["астероид", "комет"]), ("виявлено", []),
+        ("発見", []), ("観測", ["小行星", "初"]), ("발견", ["소행성", "혜성"]),
+        ("发现", ["小行星", "彗星"]), ("اكتشاف", ["كويكب"]), ("phát hiện", ["tiểu hành tinh"]),
+        ("survey", ["found", "discovered", "detected", "catalogue*"]),
+        ("catalogue*", ["asteroid*", "neo*", "object*"]), ("tracked for", []),
+    ],
+    "risk": [
+        ("potencialmente peligroso", []), ("riesgo de impacto", []), ("probabilidad de impacto", []),
+        ("potentiellement dangereux", []), ("risque d'impact", []),
+        ("potenzialmente pericoloso", []), ("rischio di impatto", []),
+        ("potencialmente perigoso", []), ("risco de impacto", []),
+        ("tehlikeli", ["asteroit", "gök"]), ("опасн*", ["астероид", "столкновен"]),
+        ("столкновени*", []), ("вероятность столкновения", []),
+        ("危険", ["小行星", "衝突"]), ("衝突確率", []), ("충돌", ["확률", "위험"]),
+        ("撞击", ["概率", "风险"]), ("خطر", ["كويكب", "اصطدام"]),
+        ("nguy cơ", ["va chạm", "tiểu hành tinh"]), ("apophis", []), ("апофис", []),
+    ],
+    "defence": [
+        ("desviar", ["asteroide", "trayectoria"]), ("deflexión", []), ("protocolo", ["nasa", "asteroide"]),
+        ("dévier", ["astéroïde"]), ("déviation", ["astéroïde"]),
+        ("deviare", ["asteroide"]), ("distrugger*", ["asteroide", "nucleare"]),
+        ("desviar a trajetória", []), ("saptırma", []), ("yok etme", ["asteroit"]),
+        ("отклонени*", ["астероид", "траектор"]), ("уничтожить", ["астероид"]),
+        ("軌道変更", []), ("破壊", ["小行星"]), ("궤도 변경", []), ("요격", ["소행성"]),
+        ("核", ["小行星", "摧毁", "偏转"]), ("摧毁", ["小行星"]),
+        ("نووي", ["كويكب"]), ("تفجير", ["كويكب"]),
+        ("ngăn", ["tiểu hành tinh", "thảm họa"]), ("গ্রহাণু", ["ধ্বংস", "মিসাইল"]),
+        ("nuclear", ["asteroid", "deflect*", "destroy", "device"]),
+        ("prepararse", ["impacto", "asteroide", "humanidad"]),
+        ("advertencia", ["asteroide", "impacto"]), ("debe prepararse", []),
+        ("prepare", ["impact", "asteroid strike", "humanity"]),
+        ("deflect*", []), ("kinetic impactor", []), ("gravity tractor", []),
+    ],
+    "impact": [
+        ("dinosaur*", ["asteroid", "extinction", "impact", "chicxulub"]),
+        ("dizimou os dinossauros", []), ("dinosaurios", ["asteroide", "extinción"]),
+        ("cratere", ["impatto"]), ("cráter", ["impacto"]), ("cratère", ["impact"]),
+        ("chelyabinsk", []), ("челябинск", []), ("tunguska", []), ("тунгусск", []),
+        ("chicxulub", []), ("bola de fuego", []), ("boule de feu", []),
+        ("كرة نارية", []), ("نيزك", ["احترق", "سماء"]),
+        ("火球", []), ("隕石落下", []), ("운석", ["떨어", "충돌"]),
+        ("взрыв", ["метеорит", "болид"]), ("падение", ["метеорит"]),
+    ],
+    "missions": [
+        ("sonda", ["asteroide", "cometa", "hayabusa", "psyche"]), ("sonde", ["astéroïde", "comète"]),
+        ("зонд", ["астероид", "комет"]), ("探査機", []), ("탐사선", []), ("探测器", []),
+        ("مسبار", []), ("tàu thăm dò", []), ("probe", ["asteroid", "comet", "flyby", "sample"]),
+        ("sample return", []), ("flyby", ["asteroid", "comet", "probe"]),
+    ],
+    "policy": [
+        ("budget", ["nasa", "mission", "asteroid", "survey", "cuts"]),
+        ("cuts", ["nasa", "mission", "survey", "programme", "program"]),
+        ("funding", ["nasa", "mission", "survey", "telescope"]),
+        ("presupuesto", ["nasa", "misión"]), ("recortes", ["nasa", "misión"]),
+    ],
+    "science": [
+        ("estudio", ["asteroide", "cometa", "impacto"]), ("étude", ["astéroïde", "comète"]),
+        ("studio", ["asteroide", "cometa"]), ("estudo", ["asteroide", "cometa"]),
+        ("исследовани*", ["астероид", "комет"]), ("研究", ["小行星", "彗星", "隕石"]),
+        ("연구", ["소행성", "혜성"]), ("دراسة", ["كويكب"]),
+        ("composition", ["asteroid", "comet", "meteorite"]), ("grains", ["dust", "ancient", "solar"]),
+        ("burn up", ["meteorite*", "atmosphere"]), ("mineral*", ["meteorite", "asteroid"]),
+        ("scientists thought", []), ("jatuh", ["meteorit"]), ("menembus atap", []),
+    ],
+}
+
+for _tid, _label, _terms in TOPICS:
+    _terms.extend(LOCAL_TERMS.get(_tid, []))
+
 ANCHOR = [
     "asteroid*", "comet*", "meteor", "meteors", "meteorite*", "meteoroid*", "bolide*",
     "near-earth object*", "near earth object*", "near-earth asteroid*", "neo surveyor",
@@ -570,6 +713,18 @@ BLOCK = [
     "world will end", "planet x", "nibiru", "doomsday prophecy", "prophecy",
     # sport and product namesakes
     "houston rockets", "premier league", "asteroid crypto", "comet token",
+    # Meteor showers are dust, not impactors, and the section is about what
+    # arrives. Viewing guides are consumer astronomy and were a steady presence.
+    "armageddon", "minaccia il mondo", "best comets to watch", "what comet is visible",
+    "visible now", "how to see", "viewing guide",
+    "meteor shower", "perseid*", "geminid*", "leonid*", "quadrantid*", "orionid*",
+    "lyrid*", "eta aquariid*", "shooting star*", "where to watch", "best time to see",
+    "stargazing guide", "night sky this week", "meteor shower calendar",
+    "lluvia de estrellas", "pluie d'étoiles filantes", "sternschnuppen",
+    "звездопад", "流星群", "유성우", "英仙座流星雨",
+    # an asteroid named after someone is an honour, not an approach
+    "named after", "honoured with an asteroid", "honored with an asteroid",
+    "lleva su apellido", "lleva su nombre",
 ]
 
 # --------------------------------------------------------------------------
@@ -606,6 +761,23 @@ EVENT_C = _compile_all(EVENT)
 OFFICIAL_LIST_C = _compile_all(OFFICIAL_LIST)
 PROJECTION_C = _compile_all(PROJECTION)
 MEASURED_C = _compile_all(MEASURED)
+
+# --------------------------------------------------------------------------
+# The same subjects in the languages this wire's own queries ask in, derived
+# from those queries and filed under the subject each query's label names. The
+# gate above was written in English; the queries were translated and it was
+# not, so three quarters of what the wire fetched could not be recognised once
+# it arrived. Generated — edit topics_multilingual.json, or delete the file to
+# turn this off.
+# --------------------------------------------------------------------------
+_EXTRA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "topics_multilingual.json")
+if os.path.exists(_EXTRA_PATH):
+    with open(_EXTRA_PATH, encoding="utf-8") as _fh:
+        _EXTRA = json.load(_fh)
+    TOPICS = [(tid, label, terms + [(t, g) for t, g in _EXTRA.get(tid, [])])
+              for tid, label, terms in TOPICS]
+
 TOPICS_C = [(tid, label, [(_compile(t), _compile_all(g) if g else None) for t, g in terms])
             for tid, label, terms in TOPICS]
 GEO3_C = [(rid, rlabel, [(sid, slabel, [(pid, plabel, _compile_all(terms))
@@ -983,19 +1155,91 @@ def scene_first(text, places):
         (scene if _is_scene(text, _first_pos(text, terms.get(pid, []))) else rest).append(pid)
     return scene + rest
 
-def point_for(text, places, subs, regions):
-    """The most specific point a story resolved to: a named sub-national place
-    if there is one, otherwise the country, otherwise the subregion or region.
-    Returns (label_or_None, point_or_None)."""
+
+# --------------------------------------------------------------------------
+# The gazetteer answers with a country; this wire's taxonomy is keyed on ids
+# whose leading token is that country's ISO-2. Filing a placed story under its
+# region is therefore a lookup, not a guess. Where a country is split across
+# several places, only region and subregion are filled: which of the places a
+# story belongs to is a question the country code cannot answer.
+# --------------------------------------------------------------------------
+ISO_REGION = {}
+for _rid, _rlabel, _subs in GEO3:
+    for _sid, _slabel, _places in _subs:
+        for _pid, _plabel, _terms in _places:
+            _iso = _pid.split("-")[0].lower()
+            if len(_iso) == 2:
+                ISO_REGION.setdefault(_iso, (_rid, _sid))
+
+
+def file_by_country(row, cc):
+    """Put a gazetteer-placed story in its region, if the wire has one."""
+    if not cc:
+        return
+    hit = ISO_REGION.get(str(cc).lower())
+    if not hit:
+        return
+    rid, sid = hit
+    if not row.get("w") or row["w"] == ["unlocated"]:
+        row["w"] = [rid]
+    if not row.get("sr") or row["sr"] == ["unlocated"]:
+        row["sr"] = [sid]
+
+
+
+def country_for(raw, locale=None):
+    """The ISO-2 the placement resolved to, or None."""
+    if not _GAZETTEER:
+        return None
+    try:
+        return galaxy_places.resolve_full(raw, locale)[4]
+    except Exception:
+        return None
+
+
+def point_for(text, places, subs, regions, locale=None, raw=None):
+    """The most specific point a story resolved to.
+
+    The order is deliberate. This wire's own curated table goes first: it holds
+    the places this subject actually turns up and the country list it was
+    written against, and it beats a general gazetteer on its own ground. The
+    shared gazetteer follows but only overrides at the settlement level, so a
+    headline naming Kharkiv pins on Kharkiv rather than the middle of Ukraine,
+    while a country reading from this wire's own table still wins over a
+    country reading from the gazetteer. Then the bodies that stand for a
+    jurisdiction without naming it — EFSA is a European story, ANVISA a
+    Brazilian one. Last, and weakest, the country the source itself reports
+    from.
+
+    Returns (label_or_None, point_or_None, approx). approx is True only for
+    that last case, where nothing in the story placed it and the point is the
+    reporting locale rather than the scene. The page draws those hollow.
+    """
     label, point = precise_for(text)
     if point:
-        return label, point
+        return label, point, False
+
+    glabel, gpoint, grank = None, None, -1
+    if _GAZETTEER:
+        glabel, gpoint, grank, _approx = galaxy_places.resolve_ranked(raw or text)
+        if grank == 3:
+            return glabel, gpoint, False
+
     places = scene_first(text, places)
     for level in (places, subs, regions):
         for pid in level:
             if pid in COORDS:
-                return None, COORDS[pid]
-    return None, None
+                return None, COORDS[pid], False
+
+    if gpoint:
+        return glabel, gpoint, False
+
+    if _GAZETTEER and locale:
+        llabel, lpoint, _lrank, lapprox = galaxy_places.resolve_ranked("", locale)
+        if lpoint:
+            return llabel, lpoint, lapprox
+
+    return None, None, False
 
 
 def load_sources():
@@ -1009,12 +1253,15 @@ def load_sources():
         for loc in cfg.get(block, []):
             srcs.append({"name": prefix + loc["label"], "lang": loc["lang"],
                          "standing": loc["standing"], "region": loc["standing"],
-                         "kind": "news", "url": build_gnews_url(loc)})
+                         "kind": "news", "url": build_gnews_url(loc), "gl": loc.get("gl")})
     return srcs, cfg
 
 
 def run(dry_run=False, fixtures=None):
+    global DEADLINE
     sources, cfg = load_sources()
+    if not fixtures:
+        DEADLINE = time.monotonic() + READ_BUDGET_MIN * 60
     print("Reading %d wires…" % len(sources))
 
     def read(src):
@@ -1067,9 +1314,22 @@ def run(dry_run=False, fixtures=None):
                 if not hit(text, ANCHOR_C):
                     continue
                 total, reasons = significance(text, src["standing"])
-                row["x"] = topics_for(text) or ["science"]
+                # No silent default. This read `or ["science"]`, which filed
+                # 388 of 530 stories under a subject none had matched — and hid
+                # that the wire's whole non-English half was landing there.
+                subjects = topics_for(text)
+                if not subjects:
+                    stat["refused"] += 1
+                    refused += 1
+                    continue
+                row["x"] = subjects
                 row["w"], row["sr"], row["pl"] = places_for(text)
-                row["pn"], row["ll"] = point_for(text, row["pl"], row["sr"], row["w"])
+                row["gl"] = src.get("gl")
+                _raw = (row["t"] or "") + " " + (row.get("s") or "")
+                row["pn"], row["ll"], row["pa"] = point_for(
+                    text, row["pl"], row["sr"], row["w"], src.get("gl"), _raw)
+                if row["ll"]:
+                    file_by_country(row, country_for(_raw, src.get("gl")))
                 row["p"] = total
                 row["y"] = reasons
                 row["st"] = src["standing"]
@@ -1082,8 +1342,23 @@ def run(dry_run=False, fixtures=None):
 
     fresh_urls = {canon_url(i["u"]) for i in items}
     for row in previous:
-        if "x" in row:
-            absorb(row)
+        if "x" not in row:
+            continue
+        # A retained story is placed again rather than carried forward with the
+        # answer it happened to get the day it was first read. RETAIN_DAYS is
+        # 45, so without this a change to the placement layer takes a month and
+        # a half to reach the map, and a story never re-fetched keeps its first
+        # answer for good. Rows already holding a point resolved from their own
+        # text are left alone; only the unplaced and the source-country
+        # approximations are reconsidered.
+        if not row.get("ll") or row.get("pa"):
+            _raw = ((row.get("t") or "") + " " + (row.get("s") or ""))
+            row["pn"], row["ll"], row["pa"] = point_for(
+                _raw.lower(), row.get("pl") or [], row.get("sr") or [],
+                row.get("w") or [], row.get("gl"), _raw)
+            if row["ll"]:
+                file_by_country(row, country_for(_raw, row.get("gl")))
+        absorb(row)
 
     cutoff = int(time.time() * 1000) - RETAIN_DAYS * 86400000
     items = [i for i in items if (i.get("d") or cutoff + 1) >= cutoff]

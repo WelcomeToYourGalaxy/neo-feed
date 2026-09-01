@@ -1,1292 +1,2606 @@
 {
-  "_note": "Wires for the near-Earth object feed. harvest_neo.py reads this and writes wire_neo.json. Each wire carries a 'standing': official, science, press or specialist. The 'events' block is a set of searches aimed at concrete happenings — close approaches, airbursts, recovered meteorites, risk-list changes, mission milestones — rather than commentary. Locale coverage is expanded: several country editions per language, and each query split into slices so no single search hits Google News's ~100-result cap.",
-  "direct": [
-    {
-      "name": "NASA JPL",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.jpl.nasa.gov/feeds/news/"
-    },
-    {
-      "name": "NASA",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.nasa.gov/feed/"
-    },
-    {
-      "name": "ESA — Space Safety",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.esa.int/rssfeed/Our_Activities/Space_Safety"
-    },
-    {
-      "name": "ESA — Space Science",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.esa.int/rssfeed/Our_Activities/Space_Science"
-    },
-    {
-      "name": "American Meteor Society",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.amsmeteors.org/feed/"
-    },
-    {
-      "name": "International Meteor Organization",
-      "lang": "en",
-      "standing": "official",
-      "url": "https://www.imo.net/feed/"
-    },
-    {
-      "name": "arXiv — NEOs & impact hazard",
-      "lang": "en",
-      "standing": "science",
-      "kind": "preprint",
-      "url": "https://export.arxiv.org/api/query?search_query=abs:%22near-Earth+asteroid%22+OR+abs:%22near-Earth+object%22+OR+abs:%22impact+hazard%22+OR+abs:%22planetary+defense%22&sortBy=submittedDate&sortOrder=descending&max_results=30"
-    },
-    {
-      "name": "arXiv — small bodies",
-      "lang": "en",
-      "standing": "science",
-      "kind": "preprint",
-      "url": "https://export.arxiv.org/api/query?search_query=abs:%22asteroid+deflection%22+OR+abs:%22meteoroid%22+OR+abs:%22bolide%22+OR+abs:%22interstellar+object%22&sortBy=submittedDate&sortOrder=descending&max_results=30"
-    },
-    {
-      "name": "Nature — news",
-      "lang": "en",
-      "standing": "science",
-      "url": "https://www.nature.com/nature.rss"
-    },
-    {
-      "name": "ScienceDaily — Asteroids",
-      "lang": "en",
-      "standing": "science",
-      "url": "https://www.sciencedaily.com/rss/space_time/asteroids_comets_and_meteors.xml"
-    },
-    {
-      "name": "Phys.org — Astronomy",
-      "lang": "en",
-      "standing": "science",
-      "url": "https://phys.org/rss-feed/space-news/astronomy/"
-    },
-    {
-      "name": "Sky & Telescope",
-      "lang": "en",
-      "standing": "specialist",
-      "url": "https://skyandtelescope.org/feed/"
-    },
-    {
-      "name": "EarthSky",
-      "lang": "en",
-      "standing": "specialist",
-      "url": "https://earthsky.org/feed/"
-    },
-    {
-      "name": "Universe Today",
-      "lang": "en",
-      "standing": "specialist",
-      "url": "https://www.universetoday.com/feed"
-    },
-    {
-      "name": "The Planetary Society",
-      "lang": "en",
-      "standing": "specialist",
-      "url": "https://www.planetary.org/rss/articles"
-    },
-    {
-      "name": "Space.com",
-      "lang": "en",
-      "standing": "press",
-      "url": "https://www.space.com/feeds/all"
-    },
-    {
-      "name": "SpaceNews",
-      "lang": "en",
-      "standing": "press",
-      "url": "https://spacenews.com/feed/"
-    }
-  ],
-  "gnews": [
-    {
-      "label": "English (US) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"near-Earth asteroid\" OR \"close approach\" asteroid OR \"planetary defense\""
-    },
-    {
-      "label": "English (US) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "fireball meteor OR \"impact probability\""
-    },
-    {
-      "label": "English (GB) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "\"near-Earth asteroid\" OR \"close approach\" asteroid OR \"planetary defense\""
-    },
-    {
-      "label": "English (GB) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "fireball meteor OR \"impact probability\""
-    },
-    {
-      "label": "English (IN) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "\"near-Earth asteroid\" OR \"close approach\" asteroid OR \"planetary defense\""
-    },
-    {
-      "label": "English (IN) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "fireball meteor OR \"impact probability\""
-    },
-    {
-      "label": "English (UK) (US) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"near-Earth object\" OR asteroid flyby OR \"planetary defence\""
-    },
-    {
-      "label": "English (UK) (US) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "meteorite fall OR bolide"
-    },
-    {
-      "label": "English (UK) (GB) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "\"near-Earth object\" OR asteroid flyby OR \"planetary defence\""
-    },
-    {
-      "label": "English (UK) (GB) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "meteorite fall OR bolide"
-    },
-    {
-      "label": "English (UK) (IN) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "\"near-Earth object\" OR asteroid flyby OR \"planetary defence\""
-    },
-    {
-      "label": "English (UK) (IN) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "meteorite fall OR bolide"
-    },
-    {
-      "label": "English (India) (US) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "asteroid Earth flyby OR meteorite fall OR \"near-Earth object\" ISRO"
-    },
-    {
-      "label": "English (India) (US) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"planetary defence\""
-    },
-    {
-      "label": "English (India) (GB) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "asteroid Earth flyby OR meteorite fall OR \"near-Earth object\" ISRO"
-    },
-    {
-      "label": "English (India) (GB) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "\"planetary defence\""
-    },
-    {
-      "label": "English (India) (IN) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "asteroid Earth flyby OR meteorite fall OR \"near-Earth object\" ISRO"
-    },
-    {
-      "label": "English (India) (IN) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-IN",
-      "gl": "IN",
-      "ceid": "IN:en",
-      "query": "\"planetary defence\""
-    },
-    {
-      "label": "English (Aus) (AU) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-AU",
-      "gl": "AU",
-      "ceid": "AU:en",
-      "query": "fireball meteor OR meteorite found OR \"near-Earth asteroid\""
-    },
-    {
-      "label": "English (Aus) (AU) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-AU",
-      "gl": "AU",
-      "ceid": "AU:en",
-      "query": "\"close approach\" asteroid"
-    },
-    {
-      "label": "English (Aus) (US) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "fireball meteor OR meteorite found OR \"near-Earth asteroid\""
-    },
-    {
-      "label": "English (Aus) (US) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"close approach\" asteroid"
-    },
-    {
-      "label": "English (Aus) (GB) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "fireball meteor OR meteorite found OR \"near-Earth asteroid\""
-    },
-    {
-      "label": "English (Aus) (GB) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "\"close approach\" asteroid"
-    },
-    {
-      "label": "English (Canada) (CA) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-CA",
-      "gl": "CA",
-      "ceid": "CA:en",
-      "query": "fireball meteor OR meteorite recovered OR \"near-Earth asteroid\""
-    },
-    {
-      "label": "English (Canada) (CA) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-CA",
-      "gl": "CA",
-      "ceid": "CA:en",
-      "query": "\"planetary defence\""
-    },
-    {
-      "label": "English (Canada) (US) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "fireball meteor OR meteorite recovered OR \"near-Earth asteroid\""
-    },
-    {
-      "label": "English (Canada) (GB) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "fireball meteor OR meteorite recovered OR \"near-Earth asteroid\""
-    },
-    {
-      "label": "English (S. Africa) (ZA) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-ZA",
-      "gl": "ZA",
-      "ceid": "ZA:en",
-      "query": "meteorite fall OR fireball sighting OR asteroid Earth"
-    },
-    {
-      "label": "English (S. Africa) (ZA) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-ZA",
-      "gl": "ZA",
-      "ceid": "ZA:en",
-      "query": "\"near-Earth object\""
-    },
-    {
-      "label": "English (S. Africa) (US) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "meteorite fall OR fireball sighting OR asteroid Earth"
-    },
-    {
-      "label": "English (S. Africa) (US) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"near-Earth object\""
-    },
-    {
-      "label": "English (S. Africa) (GB) 1",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "meteorite fall OR fireball sighting OR asteroid Earth"
-    },
-    {
-      "label": "English (S. Africa) (GB) 2",
-      "lang": "en",
-      "standing": "press",
-      "hl": "en-GB",
-      "gl": "GB",
-      "ceid": "GB:en",
-      "query": "\"near-Earth object\""
-    },
-    {
-      "label": "Español (ES) 1",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es",
-      "gl": "ES",
-      "ceid": "ES:es",
-      "query": "asteroide cercano a la Tierra OR \"defensa planetaria\" OR bólido"
-    },
-    {
-      "label": "Español (ES) 2",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es",
-      "gl": "ES",
-      "ceid": "ES:es",
-      "query": "meteorito caída OR aproximación asteroide"
-    },
-    {
-      "label": "Español (MX) 1",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "MX",
-      "ceid": "MX:es-419",
-      "query": "asteroide cercano a la Tierra OR \"defensa planetaria\" OR bólido"
-    },
-    {
-      "label": "Español (MX) 2",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "MX",
-      "ceid": "MX:es-419",
-      "query": "meteorito caída OR aproximación asteroide"
-    },
-    {
-      "label": "Español (AR) 1",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "AR",
-      "ceid": "AR:es-419",
-      "query": "asteroide cercano a la Tierra OR \"defensa planetaria\" OR bólido"
-    },
-    {
-      "label": "Español (AR) 2",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "AR",
-      "ceid": "AR:es-419",
-      "query": "meteorito caída OR aproximación asteroide"
-    },
-    {
-      "label": "Español (MX) (ES) 1",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es",
-      "gl": "ES",
-      "ceid": "ES:es",
-      "query": "asteroide Tierra OR meteorito OR bólido cielo"
-    },
-    {
-      "label": "Español (MX) (ES) 2",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es",
-      "gl": "ES",
-      "ceid": "ES:es",
-      "query": "\"defensa planetaria\" OR probabilidad de impacto"
-    },
-    {
-      "label": "Español (MX) (MX) 1",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "MX",
-      "ceid": "MX:es-419",
-      "query": "asteroide Tierra OR meteorito OR bólido cielo"
-    },
-    {
-      "label": "Español (MX) (MX) 2",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "MX",
-      "ceid": "MX:es-419",
-      "query": "\"defensa planetaria\" OR probabilidad de impacto"
-    },
-    {
-      "label": "Español (MX) (AR) 1",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "AR",
-      "ceid": "AR:es-419",
-      "query": "asteroide Tierra OR meteorito OR bólido cielo"
-    },
-    {
-      "label": "Español (MX) (AR) 2",
-      "lang": "es",
-      "standing": "press",
-      "hl": "es-419",
-      "gl": "AR",
-      "ceid": "AR:es-419",
-      "query": "\"defensa planetaria\" OR probabilidad de impacto"
-    },
-    {
-      "label": "Português (BR) 1",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "BR",
-      "ceid": "BR:pt-419",
-      "query": "asteroide próximo da Terra OR meteorito queda OR bólido"
-    },
-    {
-      "label": "Português (BR) 2",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "BR",
-      "ceid": "BR:pt-419",
-      "query": "\"defesa planetária\""
-    },
-    {
-      "label": "Português (PT) 1",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "PT",
-      "ceid": "PT:pt-150",
-      "query": "asteroide próximo da Terra OR meteorito queda OR bólido"
-    },
-    {
-      "label": "Português (PT) 2",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "PT",
-      "ceid": "PT:pt-150",
-      "query": "\"defesa planetária\""
-    },
-    {
-      "label": "Português (AO) 1",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "AO",
-      "ceid": "AO:pt-150",
-      "query": "asteroide próximo da Terra OR meteorito queda OR bólido"
-    },
-    {
-      "label": "Português (AO) 2",
-      "lang": "pt",
-      "standing": "press",
-      "hl": "pt-BR",
-      "gl": "AO",
-      "ceid": "AO:pt-150",
-      "query": "\"defesa planetária\""
-    },
-    {
-      "label": "Français (FR) 1",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "FR",
-      "ceid": "FR:fr",
-      "query": "astéroïde géocroiseur OR \"défense planétaire\" OR bolide"
-    },
-    {
-      "label": "Français (FR) 2",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "FR",
-      "ceid": "FR:fr",
-      "query": "chute de météorite OR passage astéroïde"
-    },
-    {
-      "label": "Français (BE) 1",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "BE",
-      "ceid": "BE:fr",
-      "query": "astéroïde géocroiseur OR \"défense planétaire\" OR bolide"
-    },
-    {
-      "label": "Français (BE) 2",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "BE",
-      "ceid": "BE:fr",
-      "query": "chute de météorite OR passage astéroïde"
-    },
-    {
-      "label": "Français (CA) 1",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "CA",
-      "ceid": "CA:fr",
-      "query": "astéroïde géocroiseur OR \"défense planétaire\" OR bolide"
-    },
-    {
-      "label": "Français (CA) 2",
-      "lang": "fr",
-      "standing": "press",
-      "hl": "fr",
-      "gl": "CA",
-      "ceid": "CA:fr",
-      "query": "chute de météorite OR passage astéroïde"
-    },
-    {
-      "label": "Deutsch (DE) 1",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "DE",
-      "ceid": "DE:de",
-      "query": "erdnaher Asteroid OR Planetenverteidigung OR Feuerkugel"
-    },
-    {
-      "label": "Deutsch (DE) 2",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "DE",
-      "ceid": "DE:de",
-      "query": "Meteoritenfall OR Asteroid Vorbeiflug"
-    },
-    {
-      "label": "Deutsch (AT) 1",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "AT",
-      "ceid": "AT:de",
-      "query": "erdnaher Asteroid OR Planetenverteidigung OR Feuerkugel"
-    },
-    {
-      "label": "Deutsch (AT) 2",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "AT",
-      "ceid": "AT:de",
-      "query": "Meteoritenfall OR Asteroid Vorbeiflug"
-    },
-    {
-      "label": "Deutsch (CH) 1",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "CH",
-      "ceid": "CH:de",
-      "query": "erdnaher Asteroid OR Planetenverteidigung OR Feuerkugel"
-    },
-    {
-      "label": "Deutsch (CH) 2",
-      "lang": "de",
-      "standing": "press",
-      "hl": "de",
-      "gl": "CH",
-      "ceid": "CH:de",
-      "query": "Meteoritenfall OR Asteroid Vorbeiflug"
-    },
-    {
-      "label": "Italiano (IT) 1",
-      "lang": "it",
-      "standing": "press",
-      "hl": "it",
-      "gl": "IT",
-      "ceid": "IT:it",
-      "query": "asteroide vicino alla Terra OR \"difesa planetaria\" OR bolide"
-    },
-    {
-      "label": "Italiano (IT) 2",
-      "lang": "it",
-      "standing": "press",
-      "hl": "it",
-      "gl": "IT",
-      "ceid": "IT:it",
-      "query": "caduta meteorite"
-    },
-    {
-      "label": "Italiano (CH) 1",
-      "lang": "it",
-      "standing": "press",
-      "hl": "it",
-      "gl": "CH",
-      "ceid": "CH:it",
-      "query": "asteroide vicino alla Terra OR \"difesa planetaria\" OR bolide"
-    },
-    {
-      "label": "Italiano (CH) 2",
-      "lang": "it",
-      "standing": "press",
-      "hl": "it",
-      "gl": "CH",
-      "ceid": "CH:it",
-      "query": "caduta meteorite"
-    },
-    {
-      "label": "Nederlands (NL) 1",
-      "lang": "nl",
-      "standing": "press",
-      "hl": "nl",
-      "gl": "NL",
-      "ceid": "NL:nl",
-      "query": "planetoïde aarde OR vuurbol meteoor OR meteorietinslag"
-    },
-    {
-      "label": "Nederlands (NL) 2",
-      "lang": "nl",
-      "standing": "press",
-      "hl": "nl",
-      "gl": "NL",
-      "ceid": "NL:nl",
-      "query": "planetaire verdediging"
-    },
-    {
-      "label": "Nederlands (BE) 1",
-      "lang": "nl",
-      "standing": "press",
-      "hl": "nl",
-      "gl": "BE",
-      "ceid": "BE:nl",
-      "query": "planetoïde aarde OR vuurbol meteoor OR meteorietinslag"
-    },
-    {
-      "label": "Nederlands (BE) 2",
-      "lang": "nl",
-      "standing": "press",
-      "hl": "nl",
-      "gl": "BE",
-      "ceid": "BE:nl",
-      "query": "planetaire verdediging"
-    },
-    {
-      "label": "Svenska 1",
-      "lang": "sv",
-      "standing": "press",
-      "hl": "sv",
-      "gl": "SE",
-      "ceid": "SE:sv",
-      "query": "asteroid nära jorden OR eldklot meteor OR meteoritnedslag"
-    },
-    {
-      "label": "Svenska 2",
-      "lang": "sv",
-      "standing": "press",
-      "hl": "sv",
-      "gl": "SE",
-      "ceid": "SE:sv",
-      "query": "planetärt försvar"
-    },
-    {
-      "label": "Ελληνικά 1",
-      "lang": "el",
-      "standing": "press",
-      "hl": "el",
-      "gl": "GR",
-      "ceid": "GR:el",
-      "query": "αστεροειδής Γη OR μετεωρίτης πτώση OR πλανητική άμυνα"
-    },
-    {
-      "label": "Ελληνικά 2",
-      "lang": "el",
-      "standing": "press",
-      "hl": "el",
-      "gl": "GR",
-      "ceid": "GR:el",
-      "query": "βολίδα"
-    },
-    {
-      "label": "Polski 1",
-      "lang": "pl",
-      "standing": "press",
-      "hl": "pl",
-      "gl": "PL",
-      "ceid": "PL:pl",
-      "query": "planetoida bliska Ziemi OR bolid OR upadek meteorytu"
-    },
-    {
-      "label": "Polski 2",
-      "lang": "pl",
-      "standing": "press",
-      "hl": "pl",
-      "gl": "PL",
-      "ceid": "PL:pl",
-      "query": "obrona planetarna"
-    },
-    {
-      "label": "Русский (RU) 1",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "RU",
-      "ceid": "RU:ru",
-      "query": "околоземный астероид OR падение метеорита OR болид"
-    },
-    {
-      "label": "Русский (RU) 2",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "RU",
-      "ceid": "RU:ru",
-      "query": "планетарная защита OR сближение с Землёй"
-    },
-    {
-      "label": "Русский (KZ) 1",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "KZ",
-      "ceid": "KZ:ru",
-      "query": "околоземный астероид OR падение метеорита OR болид"
-    },
-    {
-      "label": "Русский (KZ) 2",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "KZ",
-      "ceid": "KZ:ru",
-      "query": "планетарная защита OR сближение с Землёй"
-    },
-    {
-      "label": "Русский (BY) 1",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "BY",
-      "ceid": "BY:ru",
-      "query": "околоземный астероид OR падение метеорита OR болид"
-    },
-    {
-      "label": "Русский (BY) 2",
-      "lang": "ru",
-      "standing": "press",
-      "hl": "ru",
-      "gl": "BY",
-      "ceid": "BY:ru",
-      "query": "планетарная защита OR сближение с Землёй"
-    },
-    {
-      "label": "Українська 1",
-      "lang": "uk",
-      "standing": "press",
-      "hl": "uk",
-      "gl": "UA",
-      "ceid": "UA:uk",
-      "query": "навколоземний астероїд OR падіння метеорита OR болід"
-    },
-    {
-      "label": "Українська 2",
-      "lang": "uk",
-      "standing": "press",
-      "hl": "uk",
-      "gl": "UA",
-      "ceid": "UA:uk",
-      "query": "планетарний захист"
-    },
-    {
-      "label": "Türkçe 1",
-      "lang": "tr",
-      "standing": "press",
-      "hl": "tr",
-      "gl": "TR",
-      "ceid": "TR:tr",
-      "query": "dünyaya yakın asteroit OR meteor düştü OR ateş topu gökyüzü"
-    },
-    {
-      "label": "Türkçe 2",
-      "lang": "tr",
-      "standing": "press",
-      "hl": "tr",
-      "gl": "TR",
-      "ceid": "TR:tr",
-      "query": "gezegen savunması"
-    },
-    {
-      "label": "العربية (EG) 1",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "EG",
-      "ceid": "EG:ar",
-      "query": "كويكب قريب من الأرض OR سقوط نيزك OR \"الدفاع الكوكبي\""
-    },
-    {
-      "label": "العربية (EG) 2",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "EG",
-      "ceid": "EG:ar",
-      "query": "كرة نارية سماء"
-    },
-    {
-      "label": "العربية (SA) 1",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "SA",
-      "ceid": "SA:ar",
-      "query": "كويكب قريب من الأرض OR سقوط نيزك OR \"الدفاع الكوكبي\""
-    },
-    {
-      "label": "العربية (SA) 2",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "SA",
-      "ceid": "SA:ar",
-      "query": "كرة نارية سماء"
-    },
-    {
-      "label": "العربية (AE) 1",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "AE",
-      "ceid": "AE:ar",
-      "query": "كويكب قريب من الأرض OR سقوط نيزك OR \"الدفاع الكوكبي\""
-    },
-    {
-      "label": "العربية (AE) 2",
-      "lang": "ar",
-      "standing": "press",
-      "hl": "ar",
-      "gl": "AE",
-      "ceid": "AE:ar",
-      "query": "كرة نارية سماء"
-    },
-    {
-      "label": "עברית",
-      "lang": "he",
-      "standing": "press",
-      "hl": "iw",
-      "gl": "IL",
-      "ceid": "IL:iw",
-      "query": "אסטרואיד כדור הארץ OR נפילת מטאוריט OR הגנה פלנטרית"
-    },
-    {
-      "label": "فارسی 1",
-      "lang": "fa",
-      "standing": "press",
-      "hl": "fa",
-      "gl": "IR",
-      "ceid": "IR:fa",
-      "query": "سیارک نزدیک زمین OR سقوط شهاب‌سنگ OR دفاع سیاره‌ای"
-    },
-    {
-      "label": "فارسی 2",
-      "lang": "fa",
-      "standing": "press",
-      "hl": "fa",
-      "gl": "IR",
-      "ceid": "IR:fa",
-      "query": "گوی آتشین"
-    },
-    {
-      "label": "हिन्दी 1",
-      "lang": "hi",
-      "standing": "press",
-      "hl": "hi",
-      "gl": "IN",
-      "ceid": "IN:hi",
-      "query": "क्षुद्रग्रह पृथ्वी OR उल्कापिंड गिरा OR \"ग्रहीय रक्षा\""
-    },
-    {
-      "label": "हिन्दी 2",
-      "lang": "hi",
-      "standing": "press",
-      "hl": "hi",
-      "gl": "IN",
-      "ceid": "IN:hi",
-      "query": "अग्निगोला"
-    },
-    {
-      "label": "বাংলা (BD)",
-      "lang": "bn",
-      "standing": "press",
-      "hl": "bn",
-      "gl": "BD",
-      "ceid": "BD:bn",
-      "query": "গ্রহাণু পৃথিবী OR উল্কাপিণ্ড পতন OR গ্রহ প্রতিরক্ষা"
-    },
-    {
-      "label": "বাংলা (IN)",
-      "lang": "bn",
-      "standing": "press",
-      "hl": "bn",
-      "gl": "IN",
-      "ceid": "IN:bn",
-      "query": "গ্রহাণু পৃথিবী OR উল্কাপিণ্ড পতন OR গ্রহ প্রতিরক্ষা"
-    },
-    {
-      "label": "Bahasa Indonesia 1",
-      "lang": "id",
-      "standing": "press",
-      "hl": "id",
-      "gl": "ID",
-      "ceid": "ID:id",
-      "query": "asteroid dekat Bumi OR meteor jatuh OR bola api langit"
-    },
-    {
-      "label": "Bahasa Indonesia 2",
-      "lang": "id",
-      "standing": "press",
-      "hl": "id",
-      "gl": "ID",
-      "ceid": "ID:id",
-      "query": "pertahanan planet"
-    },
-    {
-      "label": "Tiếng Việt 1",
-      "lang": "vi",
-      "standing": "press",
-      "hl": "vi",
-      "gl": "VN",
-      "ceid": "VN:vi",
-      "query": "tiểu hành tinh gần Trái Đất OR thiên thạch rơi OR cầu lửa"
-    },
-    {
-      "label": "Tiếng Việt 2",
-      "lang": "vi",
-      "standing": "press",
-      "hl": "vi",
-      "gl": "VN",
-      "ceid": "VN:vi",
-      "query": "phòng thủ hành tinh"
-    },
-    {
-      "label": "ไทย 1",
-      "lang": "th",
-      "standing": "press",
-      "hl": "th",
-      "gl": "TH",
-      "ceid": "TH:th",
-      "query": "ดาวเคราะห์น้อยใกล้โลก OR อุกกาบาตตก OR ลูกไฟ ท้องฟ้า"
-    },
-    {
-      "label": "ไทย 2",
-      "lang": "th",
-      "standing": "press",
-      "hl": "th",
-      "gl": "TH",
-      "ceid": "TH:th",
-      "query": "การป้องกันดาวเคราะห์"
-    },
-    {
-      "label": "日本語 1",
-      "lang": "ja",
-      "standing": "press",
-      "hl": "ja",
-      "gl": "JP",
-      "ceid": "JP:ja",
-      "query": "地球接近小惑星 OR 隕石 落下 OR 火球 目撃"
-    },
-    {
-      "label": "日本語 2",
-      "lang": "ja",
-      "standing": "press",
-      "hl": "ja",
-      "gl": "JP",
-      "ceid": "JP:ja",
-      "query": "プラネタリーディフェンス"
-    },
-    {
-      "label": "简体中文 (CN) 1",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-CN",
-      "gl": "CN",
-      "ceid": "CN:zh-Hans",
-      "query": "近地小行星 OR 陨石坠落 OR 火流星"
-    },
-    {
-      "label": "简体中文 (CN) 2",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-CN",
-      "gl": "CN",
-      "ceid": "CN:zh-Hans",
-      "query": "行星防御 OR 小行星撞击"
-    },
-    {
-      "label": "简体中文 (TW) 1",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-TW",
-      "gl": "TW",
-      "ceid": "TW:zh-Hant",
-      "query": "近地小行星 OR 陨石坠落 OR 火流星"
-    },
-    {
-      "label": "简体中文 (TW) 2",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-TW",
-      "gl": "TW",
-      "ceid": "TW:zh-Hant",
-      "query": "行星防御 OR 小行星撞击"
-    },
-    {
-      "label": "简体中文 (HK) 1",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-HK",
-      "gl": "HK",
-      "ceid": "HK:zh-Hant",
-      "query": "近地小行星 OR 陨石坠落 OR 火流星"
-    },
-    {
-      "label": "简体中文 (HK) 2",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-HK",
-      "gl": "HK",
-      "ceid": "HK:zh-Hant",
-      "query": "行星防御 OR 小行星撞击"
-    },
-    {
-      "label": "繁體中文 (CN) 1",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-CN",
-      "gl": "CN",
-      "ceid": "CN:zh-Hans",
-      "query": "近地小行星 OR 隕石墜落 OR 火流星"
-    },
-    {
-      "label": "繁體中文 (CN) 2",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-CN",
-      "gl": "CN",
-      "ceid": "CN:zh-Hans",
-      "query": "行星防禦"
-    },
-    {
-      "label": "繁體中文 (TW) 1",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-TW",
-      "gl": "TW",
-      "ceid": "TW:zh-Hant",
-      "query": "近地小行星 OR 隕石墜落 OR 火流星"
-    },
-    {
-      "label": "繁體中文 (TW) 2",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-TW",
-      "gl": "TW",
-      "ceid": "TW:zh-Hant",
-      "query": "行星防禦"
-    },
-    {
-      "label": "繁體中文 (HK) 1",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-HK",
-      "gl": "HK",
-      "ceid": "HK:zh-Hant",
-      "query": "近地小行星 OR 隕石墜落 OR 火流星"
-    },
-    {
-      "label": "繁體中文 (HK) 2",
-      "lang": "zh",
-      "standing": "press",
-      "hl": "zh-HK",
-      "gl": "HK",
-      "ceid": "HK:zh-Hant",
-      "query": "行星防禦"
-    },
-    {
-      "label": "한국어 1",
-      "lang": "ko",
-      "standing": "press",
-      "hl": "ko",
-      "gl": "KR",
-      "ceid": "KR:ko",
-      "query": "지구 근접 소행성 OR 운석 낙하 OR 화구 목격"
-    },
-    {
-      "label": "한국어 2",
-      "lang": "ko",
-      "standing": "press",
-      "hl": "ko",
-      "gl": "KR",
-      "ceid": "KR:ko",
-      "query": "행성 방어"
-    }
-  ],
-  "events": [
-    {
-      "label": "Close approaches",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "asteroid \"close approach\" lunar distance OR asteroid passes Earth OR \"will pass safely\" asteroid OR \"flyby\" near-Earth object"
-    },
-    {
-      "label": "Impacts & airbursts",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "bolide airburst OR meteorite fall recovered OR \"impact event\" asteroid OR fireball reported witnesses OR meteorite strike"
-    },
-    {
-      "label": "Risk list & projections",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "\"impact probability\" asteroid OR Torino scale OR Palermo scale OR \"risk list\" ESA asteroid OR Sentry NASA asteroid OR Apophis 2029"
-    },
-    {
-      "label": "Deflection & missions",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "DART mission asteroid OR Hera mission Didymos OR \"NEO Surveyor\" OR kinetic impactor deflection OR \"gravity tractor\""
-    },
-    {
-      "label": "Surveys & discovery",
-      "lang": "en",
-      "standing": "science",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "Pan-STARRS discovery asteroid OR \"Catalina Sky Survey\" OR ATLAS survey asteroid OR \"Rubin Observatory\" asteroid OR \"Minor Planet Center\""
-    },
-    {
-      "label": "Sample return & science",
-      "lang": "en",
-      "standing": "science",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "Bennu sample OR Ryugu sample OR OSIRIS-APEX OR Hayabusa2 OR Lucy mission asteroid OR meteorite analysis study"
-    },
-    {
-      "label": "Policy & coordination",
-      "lang": "en",
-      "standing": "official",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "IAWN asteroid OR SMPAG planetary defence OR \"Planetary Defense Conference\" OR UN COPUOS asteroid OR national planetary defense plan"
-    },
-    {
-      "label": "Interstellar visitors",
-      "lang": "en",
-      "standing": "science",
-      "hl": "en-US",
-      "gl": "US",
-      "ceid": "US:en",
-      "query": "interstellar object comet OR 3I/ATLAS OR 2I/Borisov OR 'Oumuamua study"
-    }
-  ]
+ "_note": "Wires for the near-Earth object feed. harvest_neo.py reads this and writes wire_neo.json. Each wire carries a 'standing': official, science, press or specialist. The 'events' block is a set of searches aimed at concrete happenings — close approaches, airbursts, recovered meteorites, risk-list changes, mission milestones — rather than commentary. Locale coverage is expanded: several country editions per language, and each query split into slices so no single search hits Google News's ~100-result cap.",
+ "direct": [
+  {
+   "name": "NASA JPL",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.jpl.nasa.gov/feeds/news/"
+  },
+  {
+   "name": "NASA",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.nasa.gov/feed/"
+  },
+  {
+   "name": "ESA — Space Safety",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.esa.int/rssfeed/Our_Activities/Space_Safety"
+  },
+  {
+   "name": "ESA — Space Science",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.esa.int/rssfeed/Our_Activities/Space_Science"
+  },
+  {
+   "name": "American Meteor Society",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.amsmeteors.org/feed/"
+  },
+  {
+   "name": "International Meteor Organization",
+   "lang": "en",
+   "standing": "official",
+   "url": "https://www.imo.net/feed/"
+  },
+  {
+   "name": "arXiv — NEOs & impact hazard",
+   "lang": "en",
+   "standing": "science",
+   "kind": "preprint",
+   "url": "https://export.arxiv.org/api/query?search_query=abs:%22near-Earth+asteroid%22+OR+abs:%22near-Earth+object%22+OR+abs:%22impact+hazard%22+OR+abs:%22planetary+defense%22&sortBy=submittedDate&sortOrder=descending&max_results=30"
+  },
+  {
+   "name": "arXiv — small bodies",
+   "lang": "en",
+   "standing": "science",
+   "kind": "preprint",
+   "url": "https://export.arxiv.org/api/query?search_query=abs:%22asteroid+deflection%22+OR+abs:%22meteoroid%22+OR+abs:%22bolide%22+OR+abs:%22interstellar+object%22&sortBy=submittedDate&sortOrder=descending&max_results=30"
+  },
+  {
+   "name": "Nature — news",
+   "lang": "en",
+   "standing": "science",
+   "url": "https://www.nature.com/nature.rss"
+  },
+  {
+   "name": "ScienceDaily — Asteroids",
+   "lang": "en",
+   "standing": "science",
+   "url": "https://www.sciencedaily.com/rss/space_time/asteroids_comets_and_meteors.xml"
+  },
+  {
+   "name": "Phys.org — Astronomy",
+   "lang": "en",
+   "standing": "science",
+   "url": "https://phys.org/rss-feed/space-news/astronomy/"
+  },
+  {
+   "name": "Sky & Telescope",
+   "lang": "en",
+   "standing": "specialist",
+   "url": "https://skyandtelescope.org/feed/"
+  },
+  {
+   "name": "EarthSky",
+   "lang": "en",
+   "standing": "specialist",
+   "url": "https://earthsky.org/feed/"
+  },
+  {
+   "name": "Universe Today",
+   "lang": "en",
+   "standing": "specialist",
+   "url": "https://www.universetoday.com/feed"
+  },
+  {
+   "name": "The Planetary Society",
+   "lang": "en",
+   "standing": "specialist",
+   "url": "https://www.planetary.org/rss/articles"
+  },
+  {
+   "name": "Space.com",
+   "lang": "en",
+   "standing": "press",
+   "url": "https://www.space.com/feeds/all"
+  },
+  {
+   "name": "SpaceNews",
+   "lang": "en",
+   "standing": "press",
+   "url": "https://spacenews.com/feed/"
+  }
+ ],
+ "gnews": [
+  {
+   "label": "English (US) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"close approach\" asteroid"
+  },
+  {
+   "label": "English (US) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"planetary defense\""
+  },
+  {
+   "label": "English (US) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (GB) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"close approach\" asteroid"
+  },
+  {
+   "label": "English (GB) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"planetary defense\""
+  },
+  {
+   "label": "English (GB) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (IN) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "\"close approach\" asteroid"
+  },
+  {
+   "label": "English (IN) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "\"planetary defense\""
+  },
+  {
+   "label": "English (IN) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (UK) (US) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "asteroid flyby"
+  },
+  {
+   "label": "English (UK) (US) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"planetary defence\""
+  },
+  {
+   "label": "English (UK) (US) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"near-Earth object\""
+  },
+  {
+   "label": "English (UK) (GB) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "asteroid flyby"
+  },
+  {
+   "label": "English (UK) (GB) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"planetary defence\""
+  },
+  {
+   "label": "English (UK) (GB) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"near-Earth object\""
+  },
+  {
+   "label": "English (UK) (IN) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "asteroid flyby"
+  },
+  {
+   "label": "English (UK) (IN) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "\"planetary defence\""
+  },
+  {
+   "label": "English (UK) (IN) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "\"near-Earth object\""
+  },
+  {
+   "label": "English (India) (US) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "English (India) (US) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"near-Earth object\" ISRO"
+  },
+  {
+   "label": "English (India) (US) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "asteroid Earth flyby"
+  },
+  {
+   "label": "English (India) (GB) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "English (India) (GB) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"near-Earth object\" ISRO"
+  },
+  {
+   "label": "English (India) (GB) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "asteroid Earth flyby"
+  },
+  {
+   "label": "English (India) (IN) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "English (India) (IN) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "\"near-Earth object\" ISRO"
+  },
+  {
+   "label": "English (India) (IN) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "asteroid Earth flyby"
+  },
+  {
+   "label": "English (Aus) (AU) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "query": "meteorite found"
+  },
+  {
+   "label": "English (Aus) (AU) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (Aus) (AU) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (Aus) (US) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "meteorite found"
+  },
+  {
+   "label": "English (Aus) (US) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (Aus) (US) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (Aus) (GB) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "meteorite found"
+  },
+  {
+   "label": "English (Aus) (GB) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (Aus) (GB) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (Canada) (CA) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-CA",
+   "gl": "CA",
+   "ceid": "CA:en",
+   "query": "meteorite recovered"
+  },
+  {
+   "label": "English (Canada) (CA) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-CA",
+   "gl": "CA",
+   "ceid": "CA:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (Canada) (CA) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-CA",
+   "gl": "CA",
+   "ceid": "CA:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (Canada) (US) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "meteorite recovered"
+  },
+  {
+   "label": "English (Canada) (US) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (Canada) (US) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (Canada) (GB) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "meteorite recovered"
+  },
+  {
+   "label": "English (Canada) (GB) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"near-Earth asteroid\""
+  },
+  {
+   "label": "English (Canada) (GB) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (S. Africa) (ZA) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "query": "fireball sighting"
+  },
+  {
+   "label": "English (S. Africa) (ZA) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "query": "asteroid Earth"
+  },
+  {
+   "label": "English (S. Africa) (ZA) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "English (S. Africa) (US) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "fireball sighting"
+  },
+  {
+   "label": "English (S. Africa) (US) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "asteroid Earth"
+  },
+  {
+   "label": "English (S. Africa) (US) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "English (S. Africa) (GB) · approach",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "fireball sighting"
+  },
+  {
+   "label": "English (S. Africa) (GB) · defence",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "asteroid Earth"
+  },
+  {
+   "label": "English (S. Africa) (GB) 1",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "Español (ES) · approach",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "\"defensa planetaria\""
+  },
+  {
+   "label": "Español (ES) · defence",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "bólido"
+  },
+  {
+   "label": "Español (ES) 1",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "asteroide cercano a la Tierra"
+  },
+  {
+   "label": "Español (MX) · approach",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "\"defensa planetaria\""
+  },
+  {
+   "label": "Español (MX) · defence",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "bólido"
+  },
+  {
+   "label": "Español (MX) 1",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "asteroide cercano a la Tierra"
+  },
+  {
+   "label": "Español (AR) · approach",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "\"defensa planetaria\""
+  },
+  {
+   "label": "Español (AR) · defence",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "bólido"
+  },
+  {
+   "label": "Español (AR) 1",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "asteroide cercano a la Tierra"
+  },
+  {
+   "label": "Español (MX) (ES) · approach",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "meteorito"
+  },
+  {
+   "label": "Español (MX) (ES) · defence",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "bólido cielo"
+  },
+  {
+   "label": "Español (MX) (ES) 1",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "asteroide Tierra"
+  },
+  {
+   "label": "Español (MX) (MX) · approach",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "meteorito"
+  },
+  {
+   "label": "Español (MX) (MX) · defence",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "bólido cielo"
+  },
+  {
+   "label": "Español (MX) (MX) 1",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "asteroide Tierra"
+  },
+  {
+   "label": "Español (MX) (AR) · approach",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "meteorito"
+  },
+  {
+   "label": "Español (MX) (AR) · defence",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "bólido cielo"
+  },
+  {
+   "label": "Español (MX) (AR) 1",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "asteroide Tierra"
+  },
+  {
+   "label": "Português (BR) · approach",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "query": "meteorito queda"
+  },
+  {
+   "label": "Português (BR) · defence",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "query": "bólido"
+  },
+  {
+   "label": "Português (BR) 1",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "query": "asteroide próximo da Terra"
+  },
+  {
+   "label": "Português (PT) · approach",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "query": "meteorito queda"
+  },
+  {
+   "label": "Português (PT) · defence",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "query": "bólido"
+  },
+  {
+   "label": "Português (PT) 1",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "query": "asteroide próximo da Terra"
+  },
+  {
+   "label": "Português (AO) · approach",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "AO",
+   "ceid": "AO:pt-150",
+   "query": "meteorito queda"
+  },
+  {
+   "label": "Português (AO) · defence",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "AO",
+   "ceid": "AO:pt-150",
+   "query": "bólido"
+  },
+  {
+   "label": "Português (AO) 1",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "AO",
+   "ceid": "AO:pt-150",
+   "query": "asteroide próximo da Terra"
+  },
+  {
+   "label": "Français (FR) · approach",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "query": "\"défense planétaire\""
+  },
+  {
+   "label": "Français (FR) · defence",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "query": "bolide"
+  },
+  {
+   "label": "Français (FR) 1",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "query": "astéroïde géocroiseur"
+  },
+  {
+   "label": "Français (BE) · approach",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "BE",
+   "ceid": "BE:fr",
+   "query": "\"défense planétaire\""
+  },
+  {
+   "label": "Français (BE) · defence",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "BE",
+   "ceid": "BE:fr",
+   "query": "bolide"
+  },
+  {
+   "label": "Français (BE) 1",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "BE",
+   "ceid": "BE:fr",
+   "query": "astéroïde géocroiseur"
+  },
+  {
+   "label": "Français (CA) · approach",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "query": "\"défense planétaire\""
+  },
+  {
+   "label": "Français (CA) · defence",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "query": "bolide"
+  },
+  {
+   "label": "Français (CA) 1",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "query": "astéroïde géocroiseur"
+  },
+  {
+   "label": "Deutsch (DE) · approach",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "query": "Planetenverteidigung"
+  },
+  {
+   "label": "Deutsch (DE) · defence",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "query": "Feuerkugel"
+  },
+  {
+   "label": "Deutsch (DE) 1",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "query": "erdnaher Asteroid"
+  },
+  {
+   "label": "Deutsch (AT) · approach",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "AT",
+   "ceid": "AT:de",
+   "query": "Planetenverteidigung"
+  },
+  {
+   "label": "Deutsch (AT) · defence",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "AT",
+   "ceid": "AT:de",
+   "query": "Feuerkugel"
+  },
+  {
+   "label": "Deutsch (AT) 1",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "AT",
+   "ceid": "AT:de",
+   "query": "erdnaher Asteroid"
+  },
+  {
+   "label": "Deutsch (CH) · approach",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "CH",
+   "ceid": "CH:de",
+   "query": "Planetenverteidigung"
+  },
+  {
+   "label": "Deutsch (CH) · defence",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "CH",
+   "ceid": "CH:de",
+   "query": "Feuerkugel"
+  },
+  {
+   "label": "Deutsch (CH) 1",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "CH",
+   "ceid": "CH:de",
+   "query": "erdnaher Asteroid"
+  },
+  {
+   "label": "Italiano (IT) · approach",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "query": "\"difesa planetaria\""
+  },
+  {
+   "label": "Italiano (IT) · defence",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "query": "bolide"
+  },
+  {
+   "label": "Italiano (IT) 1",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "query": "asteroide vicino alla Terra"
+  },
+  {
+   "label": "Italiano (CH) · approach",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "CH",
+   "ceid": "CH:it",
+   "query": "\"difesa planetaria\""
+  },
+  {
+   "label": "Italiano (CH) · defence",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "CH",
+   "ceid": "CH:it",
+   "query": "bolide"
+  },
+  {
+   "label": "Italiano (CH) 1",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "CH",
+   "ceid": "CH:it",
+   "query": "asteroide vicino alla Terra"
+  },
+  {
+   "label": "Nederlands (NL) · approach",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "NL",
+   "ceid": "NL:nl",
+   "query": "vuurbol meteoor"
+  },
+  {
+   "label": "Nederlands (NL) · defence",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "NL",
+   "ceid": "NL:nl",
+   "query": "meteorietinslag"
+  },
+  {
+   "label": "Nederlands (NL) 1",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "NL",
+   "ceid": "NL:nl",
+   "query": "planetoïde aarde"
+  },
+  {
+   "label": "Nederlands (BE) · approach",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "BE",
+   "ceid": "BE:nl",
+   "query": "vuurbol meteoor"
+  },
+  {
+   "label": "Nederlands (BE) · defence",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "BE",
+   "ceid": "BE:nl",
+   "query": "meteorietinslag"
+  },
+  {
+   "label": "Nederlands (BE) 1",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "BE",
+   "ceid": "BE:nl",
+   "query": "planetoïde aarde"
+  },
+  {
+   "label": "Svenska · approach",
+   "lang": "sv",
+   "standing": "press",
+   "hl": "sv",
+   "gl": "SE",
+   "ceid": "SE:sv",
+   "query": "eldklot meteor"
+  },
+  {
+   "label": "Svenska · defence",
+   "lang": "sv",
+   "standing": "press",
+   "hl": "sv",
+   "gl": "SE",
+   "ceid": "SE:sv",
+   "query": "meteoritnedslag"
+  },
+  {
+   "label": "Svenska 1",
+   "lang": "sv",
+   "standing": "press",
+   "hl": "sv",
+   "gl": "SE",
+   "ceid": "SE:sv",
+   "query": "asteroid nära jorden"
+  },
+  {
+   "label": "Ελληνικά · approach",
+   "lang": "el",
+   "standing": "press",
+   "hl": "el",
+   "gl": "GR",
+   "ceid": "GR:el",
+   "query": "μετεωρίτης πτώση"
+  },
+  {
+   "label": "Ελληνικά · defence",
+   "lang": "el",
+   "standing": "press",
+   "hl": "el",
+   "gl": "GR",
+   "ceid": "GR:el",
+   "query": "πλανητική άμυνα"
+  },
+  {
+   "label": "Ελληνικά 1",
+   "lang": "el",
+   "standing": "press",
+   "hl": "el",
+   "gl": "GR",
+   "ceid": "GR:el",
+   "query": "αστεροειδής Γη"
+  },
+  {
+   "label": "Polski · approach",
+   "lang": "pl",
+   "standing": "press",
+   "hl": "pl",
+   "gl": "PL",
+   "ceid": "PL:pl",
+   "query": "bolid"
+  },
+  {
+   "label": "Polski · defence",
+   "lang": "pl",
+   "standing": "press",
+   "hl": "pl",
+   "gl": "PL",
+   "ceid": "PL:pl",
+   "query": "upadek meteorytu"
+  },
+  {
+   "label": "Polski 1",
+   "lang": "pl",
+   "standing": "press",
+   "hl": "pl",
+   "gl": "PL",
+   "ceid": "PL:pl",
+   "query": "planetoida bliska Ziemi"
+  },
+  {
+   "label": "Русский (RU) · approach",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "query": "падение метеорита"
+  },
+  {
+   "label": "Русский (RU) · defence",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "query": "болид"
+  },
+  {
+   "label": "Русский (RU) 1",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "query": "околоземный астероид"
+  },
+  {
+   "label": "Русский (KZ) · approach",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "KZ",
+   "ceid": "KZ:ru",
+   "query": "падение метеорита"
+  },
+  {
+   "label": "Русский (KZ) · defence",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "KZ",
+   "ceid": "KZ:ru",
+   "query": "болид"
+  },
+  {
+   "label": "Русский (KZ) 1",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "KZ",
+   "ceid": "KZ:ru",
+   "query": "околоземный астероид"
+  },
+  {
+   "label": "Русский (BY) · approach",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "BY",
+   "ceid": "BY:ru",
+   "query": "падение метеорита"
+  },
+  {
+   "label": "Русский (BY) · defence",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "BY",
+   "ceid": "BY:ru",
+   "query": "болид"
+  },
+  {
+   "label": "Русский (BY) 1",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "BY",
+   "ceid": "BY:ru",
+   "query": "околоземный астероид"
+  },
+  {
+   "label": "Українська · approach",
+   "lang": "uk",
+   "standing": "press",
+   "hl": "uk",
+   "gl": "UA",
+   "ceid": "UA:uk",
+   "query": "падіння метеорита"
+  },
+  {
+   "label": "Українська · defence",
+   "lang": "uk",
+   "standing": "press",
+   "hl": "uk",
+   "gl": "UA",
+   "ceid": "UA:uk",
+   "query": "болід"
+  },
+  {
+   "label": "Українська 1",
+   "lang": "uk",
+   "standing": "press",
+   "hl": "uk",
+   "gl": "UA",
+   "ceid": "UA:uk",
+   "query": "навколоземний астероїд"
+  },
+  {
+   "label": "Türkçe · approach",
+   "lang": "tr",
+   "standing": "press",
+   "hl": "tr",
+   "gl": "TR",
+   "ceid": "TR:tr",
+   "query": "meteor düştü"
+  },
+  {
+   "label": "Türkçe · defence",
+   "lang": "tr",
+   "standing": "press",
+   "hl": "tr",
+   "gl": "TR",
+   "ceid": "TR:tr",
+   "query": "ateş topu gökyüzü"
+  },
+  {
+   "label": "Türkçe 1",
+   "lang": "tr",
+   "standing": "press",
+   "hl": "tr",
+   "gl": "TR",
+   "ceid": "TR:tr",
+   "query": "dünyaya yakın asteroit"
+  },
+  {
+   "label": "العربية (EG) · approach",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "EG",
+   "ceid": "EG:ar",
+   "query": "سقوط نيزك"
+  },
+  {
+   "label": "العربية (EG) · defence",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "EG",
+   "ceid": "EG:ar",
+   "query": "\"الدفاع الكوكبي\""
+  },
+  {
+   "label": "العربية (EG) 1",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "EG",
+   "ceid": "EG:ar",
+   "query": "كويكب قريب من الأرض"
+  },
+  {
+   "label": "العربية (SA) · approach",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "SA",
+   "ceid": "SA:ar",
+   "query": "سقوط نيزك"
+  },
+  {
+   "label": "العربية (SA) · defence",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "SA",
+   "ceid": "SA:ar",
+   "query": "\"الدفاع الكوكبي\""
+  },
+  {
+   "label": "العربية (SA) 1",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "SA",
+   "ceid": "SA:ar",
+   "query": "كويكب قريب من الأرض"
+  },
+  {
+   "label": "العربية (AE) · approach",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "AE",
+   "ceid": "AE:ar",
+   "query": "سقوط نيزك"
+  },
+  {
+   "label": "العربية (AE) · defence",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "AE",
+   "ceid": "AE:ar",
+   "query": "\"الدفاع الكوكبي\""
+  },
+  {
+   "label": "العربية (AE) 1",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "AE",
+   "ceid": "AE:ar",
+   "query": "كويكب قريب من الأرض"
+  },
+  {
+   "label": "فارسی · approach",
+   "lang": "fa",
+   "standing": "press",
+   "hl": "fa",
+   "gl": "IR",
+   "ceid": "IR:fa",
+   "query": "سقوط شهاب‌سنگ"
+  },
+  {
+   "label": "فارسی · defence",
+   "lang": "fa",
+   "standing": "press",
+   "hl": "fa",
+   "gl": "IR",
+   "ceid": "IR:fa",
+   "query": "دفاع سیاره‌ای"
+  },
+  {
+   "label": "فارسی 1",
+   "lang": "fa",
+   "standing": "press",
+   "hl": "fa",
+   "gl": "IR",
+   "ceid": "IR:fa",
+   "query": "سیارک نزدیک زمین"
+  },
+  {
+   "label": "हिन्दी · approach",
+   "lang": "hi",
+   "standing": "press",
+   "hl": "hi",
+   "gl": "IN",
+   "ceid": "IN:hi",
+   "query": "उल्कापिंड गिरा"
+  },
+  {
+   "label": "हिन्दी · defence",
+   "lang": "hi",
+   "standing": "press",
+   "hl": "hi",
+   "gl": "IN",
+   "ceid": "IN:hi",
+   "query": "\"ग्रहीय रक्षा\""
+  },
+  {
+   "label": "हिन्दी 1",
+   "lang": "hi",
+   "standing": "press",
+   "hl": "hi",
+   "gl": "IN",
+   "ceid": "IN:hi",
+   "query": "क्षुद्रग्रह पृथ्वी"
+  },
+  {
+   "label": "Bahasa Indonesia · approach",
+   "lang": "id",
+   "standing": "press",
+   "hl": "id",
+   "gl": "ID",
+   "ceid": "ID:id",
+   "query": "meteor jatuh"
+  },
+  {
+   "label": "Bahasa Indonesia · defence",
+   "lang": "id",
+   "standing": "press",
+   "hl": "id",
+   "gl": "ID",
+   "ceid": "ID:id",
+   "query": "bola api langit"
+  },
+  {
+   "label": "Bahasa Indonesia 1",
+   "lang": "id",
+   "standing": "press",
+   "hl": "id",
+   "gl": "ID",
+   "ceid": "ID:id",
+   "query": "asteroid dekat Bumi"
+  },
+  {
+   "label": "Tiếng Việt · approach",
+   "lang": "vi",
+   "standing": "press",
+   "hl": "vi",
+   "gl": "VN",
+   "ceid": "VN:vi",
+   "query": "thiên thạch rơi"
+  },
+  {
+   "label": "Tiếng Việt · defence",
+   "lang": "vi",
+   "standing": "press",
+   "hl": "vi",
+   "gl": "VN",
+   "ceid": "VN:vi",
+   "query": "cầu lửa"
+  },
+  {
+   "label": "Tiếng Việt 1",
+   "lang": "vi",
+   "standing": "press",
+   "hl": "vi",
+   "gl": "VN",
+   "ceid": "VN:vi",
+   "query": "tiểu hành tinh gần Trái Đất"
+  },
+  {
+   "label": "ไทย · approach",
+   "lang": "th",
+   "standing": "press",
+   "hl": "th",
+   "gl": "TH",
+   "ceid": "TH:th",
+   "query": "อุกกาบาตตก"
+  },
+  {
+   "label": "ไทย · defence",
+   "lang": "th",
+   "standing": "press",
+   "hl": "th",
+   "gl": "TH",
+   "ceid": "TH:th",
+   "query": "ลูกไฟ ท้องฟ้า"
+  },
+  {
+   "label": "ไทย 1",
+   "lang": "th",
+   "standing": "press",
+   "hl": "th",
+   "gl": "TH",
+   "ceid": "TH:th",
+   "query": "ดาวเคราะห์น้อยใกล้โลก"
+  },
+  {
+   "label": "日本語 · approach",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "query": "隕石 落下"
+  },
+  {
+   "label": "日本語 · defence",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "query": "火球 目撃"
+  },
+  {
+   "label": "日本語 1",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "query": "地球接近小惑星"
+  },
+  {
+   "label": "简体中文 (CN) · approach",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "陨石坠落"
+  },
+  {
+   "label": "简体中文 (CN) · defence",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "火流星"
+  },
+  {
+   "label": "简体中文 (CN) 1",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "近地小行星"
+  },
+  {
+   "label": "繁體中文 (TW) · approach",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "隕石墜落"
+  },
+  {
+   "label": "繁體中文 (TW) · defence",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "火流星"
+  },
+  {
+   "label": "繁體中文 (TW) 1",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "近地小行星"
+  },
+  {
+   "label": "繁體中文 (HK) · approach",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "隕石墜落"
+  },
+  {
+   "label": "繁體中文 (HK) · defence",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "火流星"
+  },
+  {
+   "label": "繁體中文 (HK) 1",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "近地小行星"
+  },
+  {
+   "label": "繁體中文 (CN) · approach",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "隕石墜落"
+  },
+  {
+   "label": "繁體中文 (CN) · defence",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "火流星"
+  },
+  {
+   "label": "繁體中文 (CN) 1",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "近地小行星"
+  },
+  {
+   "label": "繁體中文 (TW) · approach",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "隕石墜落"
+  },
+  {
+   "label": "繁體中文 (TW) · defence",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "火流星"
+  },
+  {
+   "label": "繁體中文 (TW) 1",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "近地小行星"
+  },
+  {
+   "label": "繁體中文 (HK) · approach",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "隕石墜落"
+  },
+  {
+   "label": "繁體中文 (HK) · defence",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "火流星"
+  },
+  {
+   "label": "繁體中文 (HK) 1",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "近地小行星"
+  },
+  {
+   "label": "한국어 · approach",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "query": "운석 낙하"
+  },
+  {
+   "label": "한국어 · defence",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "query": "화구 목격"
+  },
+  {
+   "label": "한국어 1",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "query": "지구 근접 소행성"
+  },
+  {
+   "label": "English (US) · impact",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (US) · risk",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"impact probability\""
+  },
+  {
+   "label": "English (GB) · impact",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (GB) · risk",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"impact probability\""
+  },
+  {
+   "label": "English (IN) · impact",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "fireball meteor"
+  },
+  {
+   "label": "English (IN) · risk",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "\"impact probability\""
+  },
+  {
+   "label": "English (UK) (US) · impact",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "English (UK) (US) · risk",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "bolide"
+  },
+  {
+   "label": "English (UK) (GB) · impact",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "English (UK) (GB) · risk",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "bolide"
+  },
+  {
+   "label": "English (UK) (IN) · impact",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "meteorite fall"
+  },
+  {
+   "label": "English (UK) (IN) · risk",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "bolide"
+  },
+  {
+   "label": "English (India) (US) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"planetary defence\""
+  },
+  {
+   "label": "English (India) (GB) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"planetary defence\""
+  },
+  {
+   "label": "English (India) (IN) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-IN",
+   "gl": "IN",
+   "ceid": "IN:en",
+   "query": "\"planetary defence\""
+  },
+  {
+   "label": "English (Aus) (AU) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-AU",
+   "gl": "AU",
+   "ceid": "AU:en",
+   "query": "\"close approach\" asteroid"
+  },
+  {
+   "label": "English (Aus) (US) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"close approach\" asteroid"
+  },
+  {
+   "label": "English (Aus) (GB) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"close approach\" asteroid"
+  },
+  {
+   "label": "English (Canada) (CA) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-CA",
+   "gl": "CA",
+   "ceid": "CA:en",
+   "query": "\"planetary defence\""
+  },
+  {
+   "label": "English (S. Africa) (ZA) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-ZA",
+   "gl": "ZA",
+   "ceid": "ZA:en",
+   "query": "\"near-Earth object\""
+  },
+  {
+   "label": "English (S. Africa) (US) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"near-Earth object\""
+  },
+  {
+   "label": "English (S. Africa) (GB) 2",
+   "lang": "en",
+   "standing": "press",
+   "hl": "en-GB",
+   "gl": "GB",
+   "ceid": "GB:en",
+   "query": "\"near-Earth object\""
+  },
+  {
+   "label": "Español (ES) · impact",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "meteorito caída"
+  },
+  {
+   "label": "Español (ES) · risk",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "aproximación asteroide"
+  },
+  {
+   "label": "Español (MX) · impact",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "meteorito caída"
+  },
+  {
+   "label": "Español (MX) · risk",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "aproximación asteroide"
+  },
+  {
+   "label": "Español (AR) · impact",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "meteorito caída"
+  },
+  {
+   "label": "Español (AR) · risk",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "aproximación asteroide"
+  },
+  {
+   "label": "Español (MX) (ES) · impact",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "\"defensa planetaria\""
+  },
+  {
+   "label": "Español (MX) (ES) · risk",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es",
+   "gl": "ES",
+   "ceid": "ES:es",
+   "query": "probabilidad de impacto"
+  },
+  {
+   "label": "Español (MX) (MX) · impact",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "\"defensa planetaria\""
+  },
+  {
+   "label": "Español (MX) (MX) · risk",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "MX",
+   "ceid": "MX:es-419",
+   "query": "probabilidad de impacto"
+  },
+  {
+   "label": "Español (MX) (AR) · impact",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "\"defensa planetaria\""
+  },
+  {
+   "label": "Español (MX) (AR) · risk",
+   "lang": "es",
+   "standing": "press",
+   "hl": "es-419",
+   "gl": "AR",
+   "ceid": "AR:es-419",
+   "query": "probabilidad de impacto"
+  },
+  {
+   "label": "Português (BR) 2",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "BR",
+   "ceid": "BR:pt-419",
+   "query": "\"defesa planetária\""
+  },
+  {
+   "label": "Português (PT) 2",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "PT",
+   "ceid": "PT:pt-150",
+   "query": "\"defesa planetária\""
+  },
+  {
+   "label": "Português (AO) 2",
+   "lang": "pt",
+   "standing": "press",
+   "hl": "pt-BR",
+   "gl": "AO",
+   "ceid": "AO:pt-150",
+   "query": "\"defesa planetária\""
+  },
+  {
+   "label": "Français (FR) · impact",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "query": "chute de météorite"
+  },
+  {
+   "label": "Français (FR) · risk",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "FR",
+   "ceid": "FR:fr",
+   "query": "passage astéroïde"
+  },
+  {
+   "label": "Français (BE) · impact",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "BE",
+   "ceid": "BE:fr",
+   "query": "chute de météorite"
+  },
+  {
+   "label": "Français (BE) · risk",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "BE",
+   "ceid": "BE:fr",
+   "query": "passage astéroïde"
+  },
+  {
+   "label": "Français (CA) · impact",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "query": "chute de météorite"
+  },
+  {
+   "label": "Français (CA) · risk",
+   "lang": "fr",
+   "standing": "press",
+   "hl": "fr",
+   "gl": "CA",
+   "ceid": "CA:fr",
+   "query": "passage astéroïde"
+  },
+  {
+   "label": "Deutsch (DE) · impact",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "query": "Meteoritenfall"
+  },
+  {
+   "label": "Deutsch (DE) · risk",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "DE",
+   "ceid": "DE:de",
+   "query": "Asteroid Vorbeiflug"
+  },
+  {
+   "label": "Deutsch (AT) · impact",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "AT",
+   "ceid": "AT:de",
+   "query": "Meteoritenfall"
+  },
+  {
+   "label": "Deutsch (AT) · risk",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "AT",
+   "ceid": "AT:de",
+   "query": "Asteroid Vorbeiflug"
+  },
+  {
+   "label": "Deutsch (CH) · impact",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "CH",
+   "ceid": "CH:de",
+   "query": "Meteoritenfall"
+  },
+  {
+   "label": "Deutsch (CH) · risk",
+   "lang": "de",
+   "standing": "press",
+   "hl": "de",
+   "gl": "CH",
+   "ceid": "CH:de",
+   "query": "Asteroid Vorbeiflug"
+  },
+  {
+   "label": "Italiano (IT) 2",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "IT",
+   "ceid": "IT:it",
+   "query": "caduta meteorite"
+  },
+  {
+   "label": "Italiano (CH) 2",
+   "lang": "it",
+   "standing": "press",
+   "hl": "it",
+   "gl": "CH",
+   "ceid": "CH:it",
+   "query": "caduta meteorite"
+  },
+  {
+   "label": "Nederlands (NL) 2",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "NL",
+   "ceid": "NL:nl",
+   "query": "planetaire verdediging"
+  },
+  {
+   "label": "Nederlands (BE) 2",
+   "lang": "nl",
+   "standing": "press",
+   "hl": "nl",
+   "gl": "BE",
+   "ceid": "BE:nl",
+   "query": "planetaire verdediging"
+  },
+  {
+   "label": "Svenska 2",
+   "lang": "sv",
+   "standing": "press",
+   "hl": "sv",
+   "gl": "SE",
+   "ceid": "SE:sv",
+   "query": "planetärt försvar"
+  },
+  {
+   "label": "Ελληνικά 2",
+   "lang": "el",
+   "standing": "press",
+   "hl": "el",
+   "gl": "GR",
+   "ceid": "GR:el",
+   "query": "βολίδα"
+  },
+  {
+   "label": "Polski 2",
+   "lang": "pl",
+   "standing": "press",
+   "hl": "pl",
+   "gl": "PL",
+   "ceid": "PL:pl",
+   "query": "obrona planetarna"
+  },
+  {
+   "label": "Русский (RU) · impact",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "query": "планетарная защита"
+  },
+  {
+   "label": "Русский (RU) · risk",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "RU",
+   "ceid": "RU:ru",
+   "query": "сближение с Землёй"
+  },
+  {
+   "label": "Русский (KZ) · impact",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "KZ",
+   "ceid": "KZ:ru",
+   "query": "планетарная защита"
+  },
+  {
+   "label": "Русский (KZ) · risk",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "KZ",
+   "ceid": "KZ:ru",
+   "query": "сближение с Землёй"
+  },
+  {
+   "label": "Русский (BY) · impact",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "BY",
+   "ceid": "BY:ru",
+   "query": "планетарная защита"
+  },
+  {
+   "label": "Русский (BY) · risk",
+   "lang": "ru",
+   "standing": "press",
+   "hl": "ru",
+   "gl": "BY",
+   "ceid": "BY:ru",
+   "query": "сближение с Землёй"
+  },
+  {
+   "label": "Українська 2",
+   "lang": "uk",
+   "standing": "press",
+   "hl": "uk",
+   "gl": "UA",
+   "ceid": "UA:uk",
+   "query": "планетарний захист"
+  },
+  {
+   "label": "Türkçe 2",
+   "lang": "tr",
+   "standing": "press",
+   "hl": "tr",
+   "gl": "TR",
+   "ceid": "TR:tr",
+   "query": "gezegen savunması"
+  },
+  {
+   "label": "العربية (EG) 2",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "EG",
+   "ceid": "EG:ar",
+   "query": "كرة نارية سماء"
+  },
+  {
+   "label": "العربية (SA) 2",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "SA",
+   "ceid": "SA:ar",
+   "query": "كرة نارية سماء"
+  },
+  {
+   "label": "العربية (AE) 2",
+   "lang": "ar",
+   "standing": "press",
+   "hl": "ar",
+   "gl": "AE",
+   "ceid": "AE:ar",
+   "query": "كرة نارية سماء"
+  },
+  {
+   "label": "فارسی 2",
+   "lang": "fa",
+   "standing": "press",
+   "hl": "fa",
+   "gl": "IR",
+   "ceid": "IR:fa",
+   "query": "گوی آتشین"
+  },
+  {
+   "label": "हिन्दी 2",
+   "lang": "hi",
+   "standing": "press",
+   "hl": "hi",
+   "gl": "IN",
+   "ceid": "IN:hi",
+   "query": "अग्निगोला"
+  },
+  {
+   "label": "Bahasa Indonesia 2",
+   "lang": "id",
+   "standing": "press",
+   "hl": "id",
+   "gl": "ID",
+   "ceid": "ID:id",
+   "query": "pertahanan planet"
+  },
+  {
+   "label": "Tiếng Việt 2",
+   "lang": "vi",
+   "standing": "press",
+   "hl": "vi",
+   "gl": "VN",
+   "ceid": "VN:vi",
+   "query": "phòng thủ hành tinh"
+  },
+  {
+   "label": "ไทย 2",
+   "lang": "th",
+   "standing": "press",
+   "hl": "th",
+   "gl": "TH",
+   "ceid": "TH:th",
+   "query": "การป้องกันดาวเคราะห์"
+  },
+  {
+   "label": "日本語 2",
+   "lang": "ja",
+   "standing": "press",
+   "hl": "ja",
+   "gl": "JP",
+   "ceid": "JP:ja",
+   "query": "プラネタリーディフェンス"
+  },
+  {
+   "label": "简体中文 (CN) · impact",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "行星防御"
+  },
+  {
+   "label": "简体中文 (CN) · risk",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "小行星撞击"
+  },
+  {
+   "label": "繁體中文 (TW) · impact",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "行星防禦"
+  },
+  {
+   "label": "繁體中文 (TW) · risk",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "小行星撞擊"
+  },
+  {
+   "label": "繁體中文 (HK) · impact",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "行星防禦"
+  },
+  {
+   "label": "繁體中文 (HK) · risk",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "小行星撞擊"
+  },
+  {
+   "label": "繁體中文 (CN) 2",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-CN",
+   "gl": "CN",
+   "ceid": "CN:zh-Hans",
+   "query": "行星防禦"
+  },
+  {
+   "label": "繁體中文 (TW) 2",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-TW",
+   "gl": "TW",
+   "ceid": "TW:zh-Hant",
+   "query": "行星防禦"
+  },
+  {
+   "label": "繁體中文 (HK) 2",
+   "lang": "zh",
+   "standing": "press",
+   "hl": "zh-HK",
+   "gl": "HK",
+   "ceid": "HK:zh-Hant",
+   "query": "行星防禦"
+  },
+  {
+   "label": "한국어 2",
+   "lang": "ko",
+   "standing": "press",
+   "hl": "ko",
+   "gl": "KR",
+   "ceid": "KR:ko",
+   "query": "행성 방어"
+  },
+  {
+   "label": "עברית",
+   "lang": "he",
+   "standing": "press",
+   "hl": "iw",
+   "gl": "IL",
+   "ceid": "IL:iw",
+   "query": "אסטרואיד כדור הארץ OR נפילת מטאוריט OR הגנה פלנטרית"
+  },
+  {
+   "label": "বাংলা (BD)",
+   "lang": "bn",
+   "standing": "press",
+   "hl": "bn",
+   "gl": "BD",
+   "ceid": "BD:bn",
+   "query": "গ্রহাণু পৃথিবী OR উল্কাপিণ্ড পতন OR গ্রহ প্রতিরক্ষা"
+  },
+  {
+   "label": "বাংলা (IN)",
+   "lang": "bn",
+   "standing": "press",
+   "hl": "bn",
+   "gl": "IN",
+   "ceid": "IN:bn",
+   "query": "গ্রহাণু পৃথিবী OR উল্কাপিণ্ড পতন OR গ্রহ প্রতিরক্ষা"
+  }
+ ],
+ "events": [
+  {
+   "label": "Close approaches · approach",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "asteroid \"close approach\" lunar distance OR asteroid passes Earth OR \"will pass safely\" asteroid OR \"flyby\" near-Earth object"
+  },
+  {
+   "label": "Impacts & airbursts",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "bolide airburst OR meteorite fall recovered OR \"impact event\" asteroid OR fireball reported witnesses OR meteorite strike"
+  },
+  {
+   "label": "Risk list & projections",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "\"impact probability\" asteroid OR Torino scale OR Palermo scale OR \"risk list\" ESA asteroid OR Sentry NASA asteroid OR Apophis 2029"
+  },
+  {
+   "label": "Deflection & missions",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "DART mission asteroid OR Hera mission Didymos OR \"NEO Surveyor\" OR kinetic impactor deflection OR \"gravity tractor\""
+  },
+  {
+   "label": "Surveys & discovery",
+   "lang": "en",
+   "standing": "science",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "Pan-STARRS discovery asteroid OR \"Catalina Sky Survey\" OR ATLAS survey asteroid OR \"Rubin Observatory\" asteroid OR \"Minor Planet Center\""
+  },
+  {
+   "label": "Sample return & science",
+   "lang": "en",
+   "standing": "science",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "Bennu sample OR Ryugu sample OR OSIRIS-APEX OR Hayabusa2 OR Lucy mission asteroid OR meteorite analysis study"
+  },
+  {
+   "label": "Policy & coordination",
+   "lang": "en",
+   "standing": "official",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "IAWN asteroid OR SMPAG planetary defence OR \"Planetary Defense Conference\" OR UN COPUOS asteroid OR national planetary defense plan"
+  },
+  {
+   "label": "Interstellar visitors · approach",
+   "lang": "en",
+   "standing": "science",
+   "hl": "en-US",
+   "gl": "US",
+   "ceid": "US:en",
+   "query": "interstellar object comet OR 3I/ATLAS OR 2I/Borisov OR 'Oumuamua study"
+  }
+ ]
 }
